@@ -19,9 +19,10 @@ describe('answerText / supportsChoices', () => {
     expect(answerText(vocab('x', 'su', 'water'))).toBe('su')
     expect(answerText({ ...vocab('x', 'su', 'water'), type: 'listening' })).toBe('water')
   })
-  it('excludes sound cards', () => {
+  it('supports any card with a non-empty answer, including sound cards', () => {
     expect(supportsChoices(vocab('x', 'su', 'water'))).toBe(true)
-    expect(supportsChoices({ ...vocab('x', 'su', 'water'), type: 'sound' })).toBe(false)
+    expect(supportsChoices({ ...vocab('x', 'su', 'water'), type: 'sound' })).toBe(true)
+    expect(supportsChoices({ ...vocab('x', '', 'water') })).toBe(false)
   })
 })
 

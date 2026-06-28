@@ -9,9 +9,14 @@ export function answerText(card: SeedCard): string {
   return card.type === 'listening' ? card.en : card.az
 }
 
-/** Card types that support a multiple-choice presentation. */
+/**
+ * Whether a card can be shown as multiple choice. Every type qualifies as long
+ * as it has a non-empty answer to pick — including alphabet (sound) cards,
+ * where you pick the example word for the shown letter. Cards with no usable
+ * answer text fall back to tap-to-reveal.
+ */
 export function supportsChoices(card: SeedCard): boolean {
-  return card.type === 'vocab' || card.type === 'phrase' || card.type === 'listening' || card.type === 'cloze'
+  return answerText(card).trim().length > 0
 }
 
 // Small deterministic PRNG so a given (card, pool) yields a stable shuffle —
