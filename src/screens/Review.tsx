@@ -2,11 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Flashcard from '../components/Flashcard'
 import GradeButtons from '../components/GradeButtons'
+import Choices from '../components/Choices'
 import { buildQueue, type QueueItem } from '../lib/queue'
 import { schedule, MINUTE } from '../lib/srs'
-import { getSettings, logReview, putState } from '../lib/db'
+import { getAllCards, getSettings, logReview, putState } from '../lib/db'
 import { playCard } from '../lib/audio'
-import type { Grade } from '../lib/types'
+import { answerText, supportsChoices } from '../lib/choices'
+import type { Grade, SeedCard } from '../lib/types'
 
 // A card answered "Again" (or still in its short learning steps and due within
 // this window) is put back into the session a few cards later, rather than
@@ -18,8 +20,11 @@ const MAX_REINSERTS = 6
 export default function Review() {
   const [queue, setQueue] = useState<QueueItem[]>([])
   const [revealed, setRevealed] = useState(false)
+  const [picked, setPicked] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [audioEnabled, setAudioEnabled] = useState(true)
+  const [choiceMode, setChoiceMode] = useState(true)
+  const [pool, setPool] = useState<SeedCard[]>([])
   const [total, setTotal] = useState(0)
   const [completed, setCompleted] = useState(0)
   const [overflow, setOverflow] = useState(0)
@@ -28,13 +33,16 @@ export default function Review() {
 
   const load = useCallback(async () => {
     setLoading(true)
-    const [q, settings] = await Promise.all([buildQueue(), getSettings()])
+    const [q, settings, allCards] = await Promise.all([buildQueue(), getSettings(), getAllCards()])
     setAudioEnabled(settings.audioEnabled)
+    setChoiceMode(settings.choiceMode)
+    setPool(allCards)
     setQueue(q.items)
     setTotal(q.items.length)
     setOverflow(q.overflow)
     setCompleted(0)
     setRevealed(false)
+    setPicked(null)
     reinserts.current = new Map()
     setLoading(false)
   }, [])
@@ -44,6 +52,7 @@ export default function Review() {
   }, [load])
 
   const current = queue[0]
+  const useChoices = !!current && choiceMode && supportsChoices(current.card)
 
   const reveal = useCallback(() => {
     if (!current) return
@@ -52,6 +61,16 @@ export default function Review() {
       void playCard(current.card, audioEnabled)
     }
   }, [current, audioEnabled])
+
+  const pick = useCallback(
+    (option: string) => {
+      if (!current) return
+      setPicked(option)
+      setRevealed(true)
+      void playCard(current.card, audioEnabled)
+    },
+    [current, audioEnabled],
+  )
 
   const grade = useCallback(
     async (g: Grade) => {
@@ -78,6 +97,7 @@ export default function Review() {
 
       if (!reinsert) setCompleted((c) => c + 1)
       setRevealed(false)
+      setPicked(null)
     },
     [current],
   )
@@ -121,6 +141,7 @@ export default function Review() {
   }
 
   const progressPct = total > 0 ? Math.round((completed / total) * 100) : 0
+  const isCorrect = picked !== null && picked === answerText(current.card)
 
   return (
     <div className="screen">
@@ -146,12 +167,23 @@ export default function Review() {
       />
 
       <div style={{ marginTop: 18 }}>
-        {!revealed ? (
+        {!revealed && useChoices && (
+          <Choices card={current.card} pool={pool} picked={picked} onPick={pick} />
+        )}
+        {!revealed && !useChoices && (
           <button className="btn" onClick={reveal}>
             Show answer
           </button>
-        ) : (
-          <GradeButtons state={current.state} onGrade={grade} />
+        )}
+        {revealed && (
+          <>
+            {picked !== null && (
+              <div className={`feedback ${isCorrect ? 'ok' : 'no'}`}>
+                {isCorrect ? '✓ Correct!' : '✗ Not quite — grade yourself honestly.'}
+              </div>
+            )}
+            <GradeButtons state={current.state} onGrade={grade} />
+          </>
         )}
       </div>
     </div>

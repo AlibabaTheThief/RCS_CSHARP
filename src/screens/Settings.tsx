@@ -107,6 +107,24 @@ export default function SettingsScreen() {
       </div>
 
       <div className="list-card">
+        <div className="row">
+          <div>
+            <strong>Multiple choice</strong>
+            <div className="muted small">Tap from answer options instead of just revealing</div>
+          </div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={settings.choiceMode}
+              onChange={(e) => update({ choiceMode: e.target.checked })}
+            />
+            <span className="track" />
+            <span className="thumb" />
+          </label>
+        </div>
+      </div>
+
+      <div className="list-card">
         <strong>Daily target</strong>
         <div className="muted small" style={{ marginBottom: 10 }}>
           ~{cardsForMinutes(settings.dailyTargetMinutes)} cards/day

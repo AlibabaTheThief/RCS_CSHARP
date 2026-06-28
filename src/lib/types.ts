@@ -101,6 +101,8 @@ export interface Settings {
   dailyTargetMinutes: number
   /** Max brand-new cards introduced per day. */
   newPerDay: number
+  /** Show tappable multiple-choice options during review. */
+  choiceMode: boolean
   /** Whether the first-launch seed has been loaded. */
   seeded: boolean
 }

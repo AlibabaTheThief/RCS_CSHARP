@@ -68,6 +68,7 @@ export const DEFAULT_SETTINGS: Settings = {
   audioEnabled: true,
   dailyTargetMinutes: 15,
   newPerDay: 8,
+  choiceMode: true,
   seeded: false,
 }
 
@@ -142,6 +143,11 @@ export async function getCard(id: string): Promise<SeedCard | undefined> {
 export async function getCardsByDeck(deckId: string): Promise<SeedCard[]> {
   const db = await getDB()
   return db.getAllFromIndex('cards', 'deckId', deckId)
+}
+
+export async function getAllCards(): Promise<SeedCard[]> {
+  const db = await getDB()
+  return db.getAll('cards')
 }
 
 export async function getState(id: string): Promise<CardState | undefined> {
