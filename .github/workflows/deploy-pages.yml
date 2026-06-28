@@ -31,9 +31,10 @@ jobs:
       - run: npm ci
 
       # --- Generate Azerbaijani pronunciation audio in CI (no desktop needed) ---
-      # GitHub runners have open internet, so free gTTS can synthesise the mp3s
-      # here at deploy time and bundle them. Cache keyed on the seed content so
-      # audio only regenerates when cards.seed.json changes.
+      # GitHub runners have open internet, so we synthesise the mp3s here at
+      # deploy time and bundle them. Primary: edge-tts (free Microsoft neural
+      # az-AZ voices, reliable from datacenter IPs). Fallback: gTTS. Cache keyed
+      # on the seed content so audio only regenerates when cards.seed.json changes.
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -41,11 +42,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: public/audio
-          key: azeri-audio-${{ hashFiles('data/cards.seed.json') }}
-      - name: Generate audio (gTTS)
+          key: azeri-audio-edge-${{ hashFiles('data/cards.seed.json') }}
+      - name: Generate audio (edge-tts neural az-AZ, gTTS fallback)
         run: |
-          python -m pip install --quiet gTTS
-          python scripts/generate_audio.py
+          python -m pip install --quiet edge-tts gTTS
+          python scripts/generate_audio_edge.py || python scripts/generate_audio.py
 
       - run: npm run build
       # NOTE: Enable Pages once in repo Settings → Pages → Source: "GitHub
