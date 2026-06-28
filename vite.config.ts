@@ -15,7 +15,7 @@ export default defineConfig({
       workbox: {
         // Audio files can be large in aggregate; allow generous precache size.
         maximumFileSizeToCacheInBytes: 25 * 1024 * 1024,
-        globPatterns: ['**/*.{js,css,html,png,svg,woff2,json}'],
+        globPatterns: ['**/*.{js,css,html,png,svg,woff2,json,mp3}'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.mp3'),

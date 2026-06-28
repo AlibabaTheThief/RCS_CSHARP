@@ -41,24 +41,39 @@ def main() -> int:
     targets = [c for c in seed["cards"] if c.get("az") and c.get("hasAudio") is not False]
     print(f"gTTS · {len(targets)} cards · out: {OUT_DIR}")
 
-    made = skipped = 0
+    made = skipped = failed = 0
     for card in targets:
         out = os.path.join(OUT_DIR, f"{card['id']}.mp3")
-        if not FORCE and os.path.exists(out):
+        if not FORCE and os.path.exists(out) and os.path.getsize(out) > 0:
             skipped += 1
             continue
-        try:
-            # 'az' is Azerbaijani in Google Translate's TTS.
-            gTTS(text=card["az"], lang="az").save(out)
+        # Try Azerbaijani; Google Translate occasionally rate-limits, so retry
+        # a few times with backoff. Keep going on persistent failure so one bad
+        # word never blocks the whole (CI) run.
+        ok = False
+        for attempt in range(3):
+            try:
+                gTTS(text=card["az"], lang="az", lang_check=False).save(out)
+                ok = True
+                break
+            except Exception as err:  # noqa: BLE001
+                wait = 1.5 * (attempt + 1)
+                print(f"  … retry {card['id']} in {wait:.1f}s ({err})", file=sys.stderr)
+                time.sleep(wait)
+        if ok:
             made += 1
             print(f"  ✓ {card['id']}  {card['az']}")
             time.sleep(0.4)  # be gentle on the endpoint
-        except Exception as err:  # noqa: BLE001
-            print(f"  ✗ {card['id']}  {card['az']}\n    {err}", file=sys.stderr)
-            return 1
+        else:
+            failed += 1
+            # Drop any empty/partial file so the app treats it as "no audio".
+            if os.path.exists(out) and os.path.getsize(out) == 0:
+                os.remove(out)
+            print(f"  ✗ {card['id']}  {card['az']} (giving up)", file=sys.stderr)
 
-    print(f"Done. {made} generated, {skipped} already present.")
-    return 0
+    print(f"Done. {made} generated, {skipped} already present, {failed} failed.")
+    # Succeed as long as we produced most of the audio; a few misses are fine.
+    return 1 if targets and made == 0 and failed > 0 else 0
 
 
 if __name__ == "__main__":
