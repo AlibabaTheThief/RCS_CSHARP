@@ -1,11 +1,12 @@
 name: Deploy Azeri for Dad to GitHub Pages
 
 # Builds the PWA and publishes it to GitHub Pages so it can be opened on a
-# phone and installed via "Add to Home Screen". Runs on pushes to the dev
-# branch and can be triggered manually.
+# phone and installed via "Add to Home Screen". Publishes only from the
+# default branch (GitHub Pages restricts deployments to it); can also be run
+# manually. Develop on the dev branch, then fast-forward master to publish.
 on:
   push:
-    branches: [master, claude/azeri-learning-app-whv2tn]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
