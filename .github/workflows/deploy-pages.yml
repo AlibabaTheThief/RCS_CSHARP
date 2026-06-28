@@ -29,11 +29,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # NOTE: Enable Pages once in repo Settings → Pages → Source: "GitHub
+      # Actions". The Actions token cannot create the Pages site itself.
       - uses: actions/configure-pages@v5
-        with:
-          # Auto-provision Pages (source: GitHub Actions) so no manual setup
-          # is needed in repo settings.
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
