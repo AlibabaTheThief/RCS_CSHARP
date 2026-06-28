@@ -1,31 +1,41 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Flashcard from '../components/Flashcard'
 import GradeButtons from '../components/GradeButtons'
 import { buildQueue, type QueueItem } from '../lib/queue'
-import { schedule } from '../lib/srs'
+import { schedule, MINUTE } from '../lib/srs'
 import { getSettings, logReview, putState } from '../lib/db'
 import { playCard } from '../lib/audio'
 import type { Grade } from '../lib/types'
 
+// A card answered "Again" (or still in its short learning steps and due within
+// this window) is put back into the session a few cards later, rather than
+// dropped — so the 1-min/10-min steps actually do their job for a beginner.
+const REINSERT_WINDOW = 11 * MINUTE
+const REINSERT_GAP = 3
+const MAX_REINSERTS = 6
+
 export default function Review() {
   const [queue, setQueue] = useState<QueueItem[]>([])
-  const [index, setIndex] = useState(0)
   const [revealed, setRevealed] = useState(false)
   const [loading, setLoading] = useState(true)
   const [audioEnabled, setAudioEnabled] = useState(true)
-  const [done, setDone] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [completed, setCompleted] = useState(0)
   const [overflow, setOverflow] = useState(0)
+  // How many times each card has been re-shown this session (leech guard).
+  const reinserts = useRef<Map<string, number>>(new Map())
 
   const load = useCallback(async () => {
     setLoading(true)
     const [q, settings] = await Promise.all([buildQueue(), getSettings()])
     setAudioEnabled(settings.audioEnabled)
     setQueue(q.items)
+    setTotal(q.items.length)
     setOverflow(q.overflow)
-    setIndex(0)
+    setCompleted(0)
     setRevealed(false)
-    setDone(0)
+    reinserts.current = new Map()
     setLoading(false)
   }, [])
 
@@ -33,12 +43,11 @@ export default function Review() {
     void load()
   }, [load])
 
-  const current = queue[index]
+  const current = queue[0]
 
   const reveal = useCallback(() => {
     if (!current) return
     setRevealed(true)
-    // For production cards, play the answer audio on reveal to train the ear.
     if (current.card.type !== 'listening') {
       void playCard(current.card, audioEnabled)
     }
@@ -52,17 +61,25 @@ export default function Review() {
       await putState(nextState)
       await logReview({ cardId: current.card.id, grade: g, at: now, intervalAfter: nextState.interval })
 
-      setDone((d) => d + 1)
-      // If the card lapsed/needs another learning step soon, it may reappear in
-      // a freshly built queue; for this session we simply advance.
-      if (index + 1 >= queue.length) {
-        setIndex(queue.length) // triggers the done state
-      } else {
-        setIndex((i) => i + 1)
-      }
+      const id = current.card.id
+      const seen = reinserts.current.get(id) ?? 0
+      const reinsert =
+        nextState.learning && nextState.due <= now + REINSERT_WINDOW && seen < MAX_REINSERTS
+
+      setQueue((prev) => {
+        const next = prev.slice(1) // drop the current card from the front
+        if (reinsert) {
+          reinserts.current.set(id, seen + 1)
+          const at = Math.min(REINSERT_GAP, next.length)
+          next.splice(at, 0, { ...current, state: nextState, isNew: false })
+        }
+        return next
+      })
+
+      if (!reinsert) setCompleted((c) => c + 1)
       setRevealed(false)
     },
-    [current, index, queue.length],
+    [current],
   )
 
   if (loading) {
@@ -78,7 +95,7 @@ export default function Review() {
 
   // Finished (or nothing due).
   if (!current) {
-    const nothingToday = queue.length === 0 && done === 0
+    const nothingToday = total === 0
     return (
       <div className="screen">
         <div className="center-state">
@@ -87,7 +104,7 @@ export default function Review() {
           <p className="muted">
             {nothingToday
               ? 'No cards are due right now. Come back later, or enable more decks.'
-              : `You reviewed ${done} card${done === 1 ? '' : 's'} today. Sağ ol! 👏`}
+              : `You finished ${completed} card${completed === 1 ? '' : 's'} today. Sağ ol! 👏`}
           </p>
           {overflow > 0 && (
             <p className="muted small">
@@ -103,15 +120,14 @@ export default function Review() {
     )
   }
 
-  const total = queue.length
-  const progressPct = Math.round((index / total) * 100)
+  const progressPct = total > 0 ? Math.round((completed / total) * 100) : 0
 
   return (
     <div className="screen">
       <div className="row" style={{ marginBottom: 12 }}>
         <h1 style={{ fontSize: '1.2rem' }}>Review</h1>
         <span className="muted small">
-          {index + 1} / {total}
+          {completed} / {total}
         </span>
       </div>
       <div className="progress" style={{ marginBottom: 18 }}>

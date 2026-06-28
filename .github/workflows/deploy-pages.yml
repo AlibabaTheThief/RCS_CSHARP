@@ -29,6 +29,9 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # Gate the deploy on correctness — never publish a broken build.
+      - run: npm run typecheck
+      - run: npm run test
 
       # --- Generate Azerbaijani pronunciation audio in CI (no desktop needed) ---
       # GitHub runners have open internet, so we synthesise the mp3s here at

@@ -8,6 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview --host",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
     "audio": "node scripts/generate-audio.mjs",
     "audio:edge": "python3 scripts/generate_audio_edge.py",
     "audio:gtts": "python3 scripts/generate_audio.py"
@@ -24,6 +26,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "typescript": "^5.5.4",
     "vite": "^5.4.8",
-    "vite-plugin-pwa": "^0.20.5"
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^2.1.9"
   }
 }

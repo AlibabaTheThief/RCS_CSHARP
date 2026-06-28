@@ -1,15 +1,63 @@
-import { useEffect, useState } from 'react'
-import { getSettings, resetAll, saveSettings } from '../lib/db'
+import { useEffect, useRef, useState } from 'react'
+import {
+  exportData,
+  getSettings,
+  importData,
+  requestPersistentStorage,
+  resetAll,
+  saveSettings,
+} from '../lib/db'
 import { cardsForMinutes } from '../lib/srs'
 import type { Settings } from '../lib/types'
+
+function todayStamp(): string {
+  const d = new Date()
+  const p = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
+}
 
 export default function SettingsScreen() {
   const [settings, setSettings] = useState<Settings | null>(null)
   const [confirmReset, setConfirmReset] = useState(false)
+  const [persist, setPersist] = useState<'persisted' | 'prompt' | 'unsupported' | null>(null)
+  const [dataMsg, setDataMsg] = useState<string | null>(null)
+  const fileRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     void getSettings().then(setSettings)
+    void requestPersistentStorage().then(setPersist)
   }, [])
+
+  const doExport = async () => {
+    try {
+      const backup = await exportData()
+      const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `azeri-for-dad-backup-${todayStamp()}.json`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+      setDataMsg('✅ Backup downloaded.')
+    } catch (err) {
+      setDataMsg(`⚠️ Export failed: ${(err as Error).message}`)
+    }
+    setTimeout(() => setDataMsg(null), 4000)
+  }
+
+  const doImport = async (file: File) => {
+    try {
+      const data = JSON.parse(await file.text())
+      await importData(data)
+      setDataMsg('✅ Restored. Reloading…')
+      setTimeout(() => location.reload(), 900)
+    } catch (err) {
+      setDataMsg(`⚠️ Import failed: ${(err as Error).message}`)
+      setTimeout(() => setDataMsg(null), 5000)
+    }
+  }
 
   const update = async (patch: Partial<Settings>) => {
     if (!settings) return
@@ -94,6 +142,43 @@ export default function SettingsScreen() {
           onChange={(e) => update({ newPerDay: Number(e.target.value) })}
           style={{ width: '100%' }}
         />
+      </div>
+
+      <div className="list-card">
+        <strong>Your data</strong>
+        <div className="muted small" style={{ margin: '4px 0 12px' }}>
+          Your progress and your “Phrases for Dad” live on this device. Back them up so you never
+          lose them — keep the file somewhere safe (email it to yourself, save to cloud).
+        </div>
+        {dataMsg && <div className="banner" style={{ marginBottom: 12 }}>{dataMsg}</div>}
+        <div style={{ display: 'flex', gap: 10 }}>
+          <button className="btn" onClick={doExport}>
+            ⬇️ Back up
+          </button>
+          <button className="btn secondary" onClick={() => fileRef.current?.click()}>
+            ⬆️ Restore
+          </button>
+        </div>
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/json,.json"
+          style={{ display: 'none' }}
+          onChange={(e) => {
+            const f = e.target.files?.[0]
+            if (f) void doImport(f)
+            e.target.value = ''
+          }}
+        />
+        <div className="muted small" style={{ marginTop: 10 }}>
+          {persist === 'persisted'
+            ? '🔒 Storage is persistent — the system won’t auto-clear your data.'
+            : persist === 'prompt'
+              ? '⚠️ Storage isn’t marked persistent yet. Backing up regularly is recommended.'
+              : persist === 'unsupported'
+                ? 'ℹ️ This browser can’t guarantee persistent storage — back up regularly.'
+                : ''}
+        </div>
       </div>
 
       <div className="list-card">

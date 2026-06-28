@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import seed from '../data/cards.seed.json'
 import type { SeedFile } from './lib/types'
-import { ensureSeeded } from './lib/db'
+import { ensureSeeded, requestPersistentStorage } from './lib/db'
 import Review from './screens/Review'
 import Decks from './screens/Decks'
 import AddPhrase from './screens/AddPhrase'
@@ -14,6 +14,8 @@ export default function App() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
+    // Ask for durable storage early so progress survives storage pressure.
+    void requestPersistentStorage()
     ensureSeeded(seed as SeedFile)
       .catch((err) => console.error('Seeding failed', err))
       .finally(() => setReady(true))

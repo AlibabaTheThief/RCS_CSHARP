@@ -210,3 +210,96 @@ export async function resetAll(): Promise<void> {
   ])
   await tx.done
 }
+
+// ---------------------------------------------------------------------------
+// Durability: persistent storage + backup/restore
+// ---------------------------------------------------------------------------
+
+/**
+ * Ask the browser to make this origin's storage persistent, so the OS won't
+ * silently evict the user's progress under storage pressure. Safe to call on
+ * every launch — it's a no-op once granted. Returns the resulting state.
+ */
+export async function requestPersistentStorage(): Promise<'persisted' | 'prompt' | 'unsupported'> {
+  if (!navigator.storage?.persist) return 'unsupported'
+  try {
+    if (await navigator.storage.persisted?.()) return 'persisted'
+    return (await navigator.storage.persist()) ? 'persisted' : 'prompt'
+  } catch {
+    return 'unsupported'
+  }
+}
+
+export const BACKUP_VERSION = 1
+
+export interface BackupFile {
+  app: 'azeri-for-dad'
+  backupVersion: number
+  exportedAt: number
+  cards: SeedCard[]
+  states: CardState[]
+  decks: StoredDeck[]
+  reviews: ReviewLog[]
+  meta: { key: string; value: unknown }[]
+}
+
+/** Serialize the entire database into a portable backup object. */
+export async function exportData(): Promise<BackupFile> {
+  const db = await getDB()
+  const [cards, states, decks, reviews] = await Promise.all([
+    db.getAll('cards'),
+    db.getAll('states'),
+    db.getAll('decks'),
+    db.getAll('reviews'),
+  ])
+  // The meta store is keyed externally, so capture key/value pairs explicitly.
+  const metaKeys = await db.getAllKeys('meta')
+  const meta = await Promise.all(
+    metaKeys.map(async (key) => ({ key: String(key), value: await db.get('meta', key) })),
+  )
+  return {
+    app: 'azeri-for-dad',
+    backupVersion: BACKUP_VERSION,
+    exportedAt: Date.now(),
+    cards,
+    states,
+    decks,
+    reviews,
+    meta,
+  }
+}
+
+/** Validate a parsed object as an Azeri-for-Dad backup. Throws if invalid. */
+export function assertValidBackup(data: unknown): asserts data is BackupFile {
+  const b = data as Partial<BackupFile>
+  if (!b || b.app !== 'azeri-for-dad') throw new Error('Not an Azeri for Dad backup file.')
+  if (typeof b.backupVersion !== 'number' || b.backupVersion > BACKUP_VERSION) {
+    throw new Error('This backup was made by a newer version of the app.')
+  }
+  for (const key of ['cards', 'states', 'decks', 'reviews', 'meta'] as const) {
+    if (!Array.isArray(b[key])) throw new Error(`Backup is missing "${key}".`)
+  }
+}
+
+/**
+ * Replace all data with the contents of a validated backup. Validation happens
+ * before anything is cleared, so a bad file never destroys existing data.
+ */
+export async function importData(data: unknown): Promise<void> {
+  assertValidBackup(data)
+  const db = await getDB()
+  const tx = db.transaction(['cards', 'states', 'decks', 'reviews', 'meta'], 'readwrite')
+  await Promise.all([
+    tx.objectStore('cards').clear(),
+    tx.objectStore('states').clear(),
+    tx.objectStore('decks').clear(),
+    tx.objectStore('reviews').clear(),
+    tx.objectStore('meta').clear(),
+  ])
+  for (const c of data.cards) await tx.objectStore('cards').put(c)
+  for (const s of data.states) await tx.objectStore('states').put(s)
+  for (const d of data.decks) await tx.objectStore('decks').put(d)
+  for (const r of data.reviews) await tx.objectStore('reviews').put(r)
+  for (const m of data.meta) await tx.objectStore('meta').put(m.value, m.key)
+  await tx.done
+}
