@@ -34,153 +34,1627 @@
       "phase": 2,
       "description": "Numbers, 'I have / want / like', food and home, present tense, question words. ~3–4 weeks.",
       "enabledByDefault": false
+    },
+    {
+      "id": "patterns",
+      "name": "Patterns",
+      "phase": 2,
+      "description": "Fill-in-the-blank patterns — swap the word to build your own sentences.",
+      "enabledByDefault": false
+    },
+    {
+      "id": "dialogues",
+      "name": "Call with Dad",
+      "phase": 1,
+      "description": "Short scripted conversations you can run end-to-end, then say for real.",
+      "enabledByDefault": false
     }
   ],
   "cards": [
-    { "id": "s-a", "deckId": "phase0", "type": "sound", "letter": "A a", "az": "ata", "en": "father (dad)", "hook": "like the 'a' in 'father'", "tags": ["vowel"] },
-    { "id": "s-b", "deckId": "phase0", "type": "sound", "letter": "B b", "az": "balıq", "en": "fish", "hook": "like English 'b'", "tags": ["consonant"] },
-    { "id": "s-c", "deckId": "phase0", "type": "sound", "letter": "C c", "az": "cib", "en": "pocket", "hook": "the #1 reading trap: c = 'j' as in 'jam' [дж]", "tags": ["consonant", "tricky"] },
-    { "id": "s-ch", "deckId": "phase0", "type": "sound", "letter": "Ç ç", "az": "çay", "en": "tea", "hook": "ç = 'ch' as in 'chair' [ч]", "tags": ["consonant", "tricky"] },
-    { "id": "s-d", "deckId": "phase0", "type": "sound", "letter": "D d", "az": "dost", "en": "friend", "hook": "like English 'd'", "tags": ["consonant"] },
-    { "id": "s-e", "deckId": "phase0", "type": "sound", "letter": "E e", "az": "ev", "en": "house", "hook": "like the 'e' in 'bed'", "tags": ["vowel"] },
-    { "id": "s-schwa", "deckId": "phase0", "type": "sound", "letter": "Ə ə", "az": "əl", "en": "hand", "hook": "schwa — the most common vowel; like the 'a' in 'cat'", "tags": ["vowel", "tricky"] },
-    { "id": "s-f", "deckId": "phase0", "type": "sound", "letter": "F f", "az": "fil", "en": "elephant", "hook": "like English 'f'", "tags": ["consonant"] },
-    { "id": "s-g", "deckId": "phase0", "type": "sound", "letter": "G g", "az": "gül", "en": "flower / rose", "hook": "soft 'g' as in 'get'", "tags": ["consonant"] },
-    { "id": "s-gh", "deckId": "phase0", "type": "sound", "letter": "Ğ ğ", "az": "dağ", "en": "mountain", "hook": "soft, near-silent; it lengthens the vowel before it. Never starts a word.", "tags": ["consonant", "tricky"] },
-    { "id": "s-h", "deckId": "phase0", "type": "sound", "letter": "H h", "az": "hava", "en": "air / weather", "hook": "like English 'h'", "tags": ["consonant"] },
-    { "id": "s-x", "deckId": "phase0", "type": "sound", "letter": "X x", "az": "xala", "en": "aunt (mother's sister)", "hook": "x = 'kh', raspy back-of-throat [х]", "tags": ["consonant", "tricky"] },
-    { "id": "s-dotless-i", "deckId": "phase0", "type": "sound", "letter": "I ı", "az": "qız", "en": "girl / daughter", "hook": "dotless ı — back unrounded vowel [Russian ы]", "tags": ["vowel", "tricky"] },
-    { "id": "s-dotted-i", "deckId": "phase0", "type": "sound", "letter": "İ i", "az": "it", "en": "dog", "hook": "dotted i — like the 'ee' in 'see' (shorter)", "tags": ["vowel"] },
-    { "id": "s-j", "deckId": "phase0", "type": "sound", "letter": "J j", "az": "jurnal", "en": "magazine", "hook": "j = 'zh', like the 's' in 'measure' [ж]", "tags": ["consonant", "tricky"] },
-    { "id": "s-k", "deckId": "phase0", "type": "sound", "letter": "K k", "az": "kitab", "en": "book", "hook": "like English 'k'", "tags": ["consonant"] },
-    { "id": "s-q", "deckId": "phase0", "type": "sound", "letter": "Q q", "az": "qardaş", "en": "brother", "hook": "q ≈ a hard 'g' made further back", "tags": ["consonant", "tricky"] },
-    { "id": "s-l", "deckId": "phase0", "type": "sound", "letter": "L l", "az": "limon", "en": "lemon", "hook": "like English 'l'", "tags": ["consonant"] },
-    { "id": "s-m", "deckId": "phase0", "type": "sound", "letter": "M m", "az": "mən", "en": "I / me", "hook": "like English 'm'", "tags": ["consonant"] },
-    { "id": "s-n", "deckId": "phase0", "type": "sound", "letter": "N n", "az": "nənə", "en": "grandmother", "hook": "like English 'n'", "tags": ["consonant"] },
-    { "id": "s-o", "deckId": "phase0", "type": "sound", "letter": "O o", "az": "od", "en": "fire", "hook": "like the 'o' in 'more' (no glide)", "tags": ["vowel"] },
-    { "id": "s-oe", "deckId": "phase0", "type": "sound", "letter": "Ö ö", "az": "ördək", "en": "duck", "hook": "rounded front vowel, like German ö", "tags": ["vowel", "tricky"] },
-    { "id": "s-p", "deckId": "phase0", "type": "sound", "letter": "P p", "az": "pul", "en": "money", "hook": "like English 'p'", "tags": ["consonant"] },
-    { "id": "s-r", "deckId": "phase0", "type": "sound", "letter": "R r", "az": "rəng", "en": "colour", "hook": "lightly rolled/tapped 'r'", "tags": ["consonant"] },
-    { "id": "s-s", "deckId": "phase0", "type": "sound", "letter": "S s", "az": "su", "en": "water", "hook": "like English 's'", "tags": ["consonant"] },
-    { "id": "s-sh", "deckId": "phase0", "type": "sound", "letter": "Ş ş", "az": "şəhər", "en": "city", "hook": "ş = 'sh' as in 'ship' [ш]", "tags": ["consonant", "tricky"] },
-    { "id": "s-t", "deckId": "phase0", "type": "sound", "letter": "T t", "az": "top", "en": "ball", "hook": "like English 't'", "tags": ["consonant"] },
-    { "id": "s-u", "deckId": "phase0", "type": "sound", "letter": "U u", "az": "uşaq", "en": "child", "hook": "like the 'oo' in 'boot'", "tags": ["vowel"] },
-    { "id": "s-ue", "deckId": "phase0", "type": "sound", "letter": "Ü ü", "az": "üzüm", "en": "grapes", "hook": "rounded front vowel, like German ü", "tags": ["vowel", "tricky"] },
-    { "id": "s-v", "deckId": "phase0", "type": "sound", "letter": "V v", "az": "vaxt", "en": "time", "hook": "like English 'v'", "tags": ["consonant"] },
-    { "id": "s-y", "deckId": "phase0", "type": "sound", "letter": "Y y", "az": "yol", "en": "road / way", "hook": "like the 'y' in 'yes'", "tags": ["consonant"] },
-    { "id": "s-z", "deckId": "phase0", "type": "sound", "letter": "Z z", "az": "zəng", "en": "bell / phone call", "hook": "like English 'z'", "tags": ["consonant"] },
-
-    { "id": "p1-men", "deckId": "phase1", "type": "vocab", "az": "mən", "en": "I / me", "tags": ["pronoun"] },
-    { "id": "p1-sen", "deckId": "phase1", "type": "vocab", "az": "sən", "en": "you (informal)", "tags": ["pronoun"], "note": "Use with family and friends — perfect for Dad." },
-    { "id": "p1-o", "deckId": "phase1", "type": "vocab", "az": "o", "en": "he / she / it", "tags": ["pronoun"], "note": "No gender in Azerbaijani — 'o' covers he, she and it." },
-    { "id": "p1-biz", "deckId": "phase1", "type": "vocab", "az": "biz", "en": "we", "tags": ["pronoun"] },
-    { "id": "p1-siz", "deckId": "phase1", "type": "vocab", "az": "siz", "en": "you (plural / polite)", "tags": ["pronoun"] },
-    { "id": "p1-onlar", "deckId": "phase1", "type": "vocab", "az": "onlar", "en": "they", "tags": ["pronoun"] },
-
-    { "id": "p1-ata", "deckId": "phase1", "type": "vocab", "az": "ata", "en": "father / dad", "tags": ["family", "heart"] },
-    { "id": "p1-ana", "deckId": "phase1", "type": "vocab", "az": "ana", "en": "mother / mum", "tags": ["family"] },
-    { "id": "p1-qardas", "deckId": "phase1", "type": "vocab", "az": "qardaş", "en": "brother", "tags": ["family"] },
-    { "id": "p1-baci", "deckId": "phase1", "type": "vocab", "az": "bacı", "en": "sister", "tags": ["family"] },
-    { "id": "p1-ogul", "deckId": "phase1", "type": "vocab", "az": "oğul", "en": "son", "tags": ["family"] },
-    { "id": "p1-qiz", "deckId": "phase1", "type": "vocab", "az": "qız", "en": "daughter / girl", "tags": ["family"] },
-    { "id": "p1-baba", "deckId": "phase1", "type": "vocab", "az": "baba", "en": "grandfather", "tags": ["family"] },
-    { "id": "p1-nene", "deckId": "phase1", "type": "vocab", "az": "nənə", "en": "grandmother", "tags": ["family"] },
-    { "id": "p1-aile", "deckId": "phase1", "type": "vocab", "az": "ailə", "en": "family", "tags": ["family"] },
-    { "id": "p1-usaq", "deckId": "phase1", "type": "vocab", "az": "uşaq", "en": "child", "tags": ["family"] },
-    { "id": "p1-arvad", "deckId": "phase1", "type": "vocab", "az": "arvad", "en": "wife", "tags": ["family"] },
-    { "id": "p1-er", "deckId": "phase1", "type": "vocab", "az": "ər", "en": "husband", "tags": ["family"] },
-
-    { "id": "p1-salam", "deckId": "phase1", "type": "phrase", "az": "Salam", "en": "Hello / Hi", "tags": ["greeting", "heart"] },
-    { "id": "p1-sagol", "deckId": "phase1", "type": "phrase", "az": "Sağ ol", "en": "Thank you / Thanks (informal)", "tags": ["greeting", "heart"] },
-    { "id": "p1-coxsagol", "deckId": "phase1", "type": "phrase", "az": "Çox sağ ol", "en": "Thank you very much", "tags": ["greeting"] },
-    { "id": "p1-sagolun", "deckId": "phase1", "type": "phrase", "az": "Sağ olun", "en": "Thank you (polite)", "tags": ["greeting"], "note": "The -un ending is the polite/plural form." },
-    { "id": "p1-necesen", "deckId": "phase1", "type": "phrase", "az": "Necəsən?", "en": "How are you? (informal)", "tags": ["greeting", "heart"] },
-    { "id": "p1-yaxsiyam", "deckId": "phase1", "type": "phrase", "az": "Yaxşıyam", "en": "I'm good / I'm fine", "tags": ["greeting", "heart"], "note": "yaxşı (good) + -yam (I am)." },
-    { "id": "p1-beli", "deckId": "phase1", "type": "vocab", "az": "bəli", "en": "yes", "tags": ["basic"] },
-    { "id": "p1-he", "deckId": "phase1", "type": "vocab", "az": "hə", "en": "yeah (casual yes)", "tags": ["basic"] },
-    { "id": "p1-yox", "deckId": "phase1", "type": "vocab", "az": "yox", "en": "no", "tags": ["basic"] },
-    { "id": "p1-yaxsi", "deckId": "phase1", "type": "vocab", "az": "yaxşı", "en": "good / fine / okay", "tags": ["basic"] },
-    { "id": "p1-pis", "deckId": "phase1", "type": "vocab", "az": "pis", "en": "bad", "tags": ["basic"] },
-    { "id": "p1-bagisla", "deckId": "phase1", "type": "phrase", "az": "Bağışla", "en": "Sorry / Excuse me", "tags": ["basic"] },
-    { "id": "p1-zehmet", "deckId": "phase1", "type": "phrase", "az": "Zəhmət olmasa", "en": "Please", "tags": ["basic"] },
-    { "id": "p1-sabah", "deckId": "phase1", "type": "phrase", "az": "Sabahın xeyir", "en": "Good morning", "tags": ["greeting"] },
-    { "id": "p1-axsam", "deckId": "phase1", "type": "phrase", "az": "Axşamın xeyir", "en": "Good evening", "tags": ["greeting"] },
-
-    { "id": "p1-sevmek", "deckId": "phase1", "type": "vocab", "az": "sevirəm", "en": "I love", "tags": ["verb", "heart"], "note": "From sevmək (to love)." },
-    { "id": "p1-istemek", "deckId": "phase1", "type": "vocab", "az": "istəyirəm", "en": "I want", "tags": ["verb"], "note": "From istəmək (to want)." },
-    { "id": "p1-bilmek", "deckId": "phase1", "type": "vocab", "az": "bilirəm", "en": "I know", "tags": ["verb"], "note": "From bilmək (to know)." },
-    { "id": "p1-seni-sevirem", "deckId": "phase1", "type": "phrase", "az": "Səni sevirəm", "en": "I love you", "tags": ["heart"], "note": "səni (you, object) + sevirəm (I love)." },
-    { "id": "p1-sen-atamsan", "deckId": "phase1", "type": "phrase", "az": "Sən mənim atamsan", "en": "You are my father", "tags": ["heart"], "note": "mənim (my) + ata + -m (my) + -san (you are)." },
-    { "id": "p1-men-buradayam", "deckId": "phase1", "type": "phrase", "az": "Mən buradayam", "en": "I am here", "tags": ["phrase"] },
-    { "id": "p1-darixmisam", "deckId": "phase1", "type": "phrase", "az": "Darıxmışam", "en": "I've missed you", "tags": ["heart"], "note": "Everyday way to say it. More literary: 'Səndən ötrü darıxmışam'." },
-    { "id": "p1-dede", "deckId": "phase1", "type": "vocab", "az": "dədə", "en": "dad (affectionate)", "tags": ["family", "heart"], "note": "Warm word for father; in some regions it means grandfather." },
-
-    { "id": "p1-pair-yaxsiyam", "deckId": "phase1", "type": "phrase", "az": "Sağ ol, yaxşıyam", "en": "Thanks, I'm good", "tags": ["greeting", "pair"], "note": "Natural reply to 'Necəsən?'" },
-    { "id": "p1-pair-senecesen", "deckId": "phase1", "type": "phrase", "az": "Bəs sən necəsən?", "en": "And how are you?", "tags": ["greeting", "pair"], "note": "Turn the question back to Dad." },
-    { "id": "p1-pair-pisdeyilem", "deckId": "phase1", "type": "phrase", "az": "Pis deyiləm", "en": "Not bad", "tags": ["greeting", "pair"] },
-    { "id": "p1-pair-senede", "deckId": "phase1", "type": "phrase", "az": "Sənə də", "en": "You too", "tags": ["greeting", "pair"], "note": "Reply to a good wish, e.g. 'Sabahın xeyir' → 'Sənə də'." },
-
-    { "id": "l1-salam", "deckId": "listening1", "type": "listening", "az": "Salam", "en": "Hello / Hi", "tags": ["greeting"] },
-    { "id": "l1-necesen", "deckId": "listening1", "type": "listening", "az": "Necəsən?", "en": "How are you?", "tags": ["greeting"] },
-    { "id": "l1-yaxsiyam", "deckId": "listening1", "type": "listening", "az": "Yaxşıyam", "en": "I'm good", "tags": ["greeting"] },
-    { "id": "l1-ata", "deckId": "listening1", "type": "listening", "az": "ata", "en": "father / dad", "tags": ["family"] },
-    { "id": "l1-ana", "deckId": "listening1", "type": "listening", "az": "ana", "en": "mother / mum", "tags": ["family"] },
-    { "id": "l1-sevirem", "deckId": "listening1", "type": "listening", "az": "Səni sevirəm", "en": "I love you", "tags": ["heart"] },
-    { "id": "l1-sagol", "deckId": "listening1", "type": "listening", "az": "Sağ ol", "en": "Thanks", "tags": ["greeting"] },
-    { "id": "l1-beli-yox", "deckId": "listening1", "type": "listening", "az": "bəli", "en": "yes", "tags": ["basic"] },
-
-    { "id": "dad-salam-ata", "deckId": "dad", "type": "dad", "az": "Salam, ata!", "en": "Hi, Dad!", "tags": ["heart"] },
-    { "id": "dad-necesen", "deckId": "dad", "type": "dad", "az": "Necəsən?", "en": "How are you?", "tags": ["heart"] },
-    { "id": "dad-yaxsiyam", "deckId": "dad", "type": "dad", "az": "Yaxşıyam.", "en": "I'm good.", "tags": ["heart"] },
-    { "id": "dad-sagol", "deckId": "dad", "type": "dad", "az": "Sağ ol.", "en": "Thanks.", "tags": ["heart"] },
-    { "id": "dad-beli-yox", "deckId": "dad", "type": "dad", "az": "Bəli / Yox", "en": "Yes / No", "tags": ["heart"] },
-    { "id": "dad-seni-sevirem", "deckId": "dad", "type": "dad", "az": "Səni sevirəm, ata.", "en": "I love you, Dad.", "tags": ["heart"] },
-    { "id": "dad-oyrenirem", "deckId": "dad", "type": "dad", "az": "Mən Azərbaycan dilini öyrənirəm.", "en": "I'm learning Azerbaijani.", "tags": ["heart"] },
-    { "id": "dad-danismaq", "deckId": "dad", "type": "dad", "az": "Səninlə danışmaq istəyirəm.", "en": "I want to talk with you.", "tags": ["heart"] },
-    { "id": "dad-biraz", "deckId": "dad", "type": "dad", "az": "Bir az Azərbaycanca bilirəm.", "en": "I know a little Azerbaijani.", "tags": ["heart"] },
-    { "id": "dad-basa-dusurem", "deckId": "dad", "type": "dad", "az": "Mən səni başa düşürəm.", "en": "I understand you.", "tags": ["heart"] },
-
-    { "id": "p2-bir", "deckId": "phase2", "type": "vocab", "az": "bir", "en": "one (1)", "tags": ["number"] },
-    { "id": "p2-iki", "deckId": "phase2", "type": "vocab", "az": "iki", "en": "two (2)", "tags": ["number"] },
-    { "id": "p2-uc", "deckId": "phase2", "type": "vocab", "az": "üç", "en": "three (3)", "tags": ["number"] },
-    { "id": "p2-dord", "deckId": "phase2", "type": "vocab", "az": "dörd", "en": "four (4)", "tags": ["number"] },
-    { "id": "p2-bes", "deckId": "phase2", "type": "vocab", "az": "beş", "en": "five (5)", "tags": ["number"] },
-    { "id": "p2-su", "deckId": "phase2", "type": "vocab", "az": "su", "en": "water", "tags": ["food"] },
-    { "id": "p2-corek", "deckId": "phase2", "type": "vocab", "az": "çörək", "en": "bread", "tags": ["food"] },
-    { "id": "p2-cay", "deckId": "phase2", "type": "vocab", "az": "çay", "en": "tea", "tags": ["food"] },
-    { "id": "p2-ne", "deckId": "phase2", "type": "vocab", "az": "nə", "en": "what", "tags": ["question"] },
-    { "id": "p2-kim", "deckId": "phase2", "type": "vocab", "az": "kim", "en": "who", "tags": ["question"] },
-    { "id": "p2-harada", "deckId": "phase2", "type": "vocab", "az": "harada", "en": "where", "tags": ["question"] },
-    { "id": "p2-var", "deckId": "phase2", "type": "phrase", "az": "var", "en": "there is / I have", "tags": ["verb"], "note": "Azerbaijani uses 'var' (exists) for having: 'Pulum var' = I have money." },
-    { "id": "p2-yox-yoxdu", "deckId": "phase2", "type": "phrase", "az": "yoxdu", "en": "there isn't / I don't have", "tags": ["verb"], "note": "Opposite of 'var': 'Vaxtım yoxdu' = I don't have time." },
-
-    { "id": "p2-alti", "deckId": "phase2", "type": "vocab", "az": "altı", "en": "six (6)", "tags": ["number"] },
-    { "id": "p2-yeddi", "deckId": "phase2", "type": "vocab", "az": "yeddi", "en": "seven (7)", "tags": ["number"] },
-    { "id": "p2-sekkiz", "deckId": "phase2", "type": "vocab", "az": "səkkiz", "en": "eight (8)", "tags": ["number"] },
-    { "id": "p2-doqquz", "deckId": "phase2", "type": "vocab", "az": "doqquz", "en": "nine (9)", "tags": ["number"] },
-    { "id": "p2-on", "deckId": "phase2", "type": "vocab", "az": "on", "en": "ten (10)", "tags": ["number"] },
-
-    { "id": "p2-niye", "deckId": "phase2", "type": "vocab", "az": "niyə", "en": "why", "tags": ["question"] },
-    { "id": "p2-nece", "deckId": "phase2", "type": "vocab", "az": "necə", "en": "how", "tags": ["question"] },
-    { "id": "p2-nevaxt", "deckId": "phase2", "type": "vocab", "az": "nə vaxt", "en": "when", "tags": ["question"] },
-    { "id": "p2-hansi", "deckId": "phase2", "type": "vocab", "az": "hansı", "en": "which", "tags": ["question"] },
-
-    { "id": "p2-ve", "deckId": "phase2", "type": "vocab", "az": "və", "en": "and", "tags": ["connector"] },
-    { "id": "p2-amma", "deckId": "phase2", "type": "vocab", "az": "amma", "en": "but", "tags": ["connector"] },
-    { "id": "p2-cunki", "deckId": "phase2", "type": "vocab", "az": "çünki", "en": "because", "tags": ["connector"] },
-    { "id": "p2-sonra", "deckId": "phase2", "type": "vocab", "az": "sonra", "en": "then / after", "tags": ["connector"] },
-
-    { "id": "p2-gedirem", "deckId": "phase2", "type": "vocab", "az": "gedirəm", "en": "I go / I'm going", "tags": ["verb"], "note": "From getmək (to go)." },
-    { "id": "p2-gelirem", "deckId": "phase2", "type": "vocab", "az": "gəlirəm", "en": "I come / I'm coming", "tags": ["verb"], "note": "From gəlmək (to come)." },
-    { "id": "p2-gorurem", "deckId": "phase2", "type": "vocab", "az": "görürəm", "en": "I see", "tags": ["verb"], "note": "From görmək (to see)." },
-    { "id": "p2-edirem", "deckId": "phase2", "type": "vocab", "az": "edirəm", "en": "I do / I make", "tags": ["verb"], "note": "From etmək (to do)." },
-
-    { "id": "p2-bugun", "deckId": "phase2", "type": "vocab", "az": "bu gün", "en": "today", "tags": ["time"] },
-    { "id": "p2-indi", "deckId": "phase2", "type": "vocab", "az": "indi", "en": "now", "tags": ["time"] },
-    { "id": "p2-sabah", "deckId": "phase2", "type": "vocab", "az": "sabah", "en": "tomorrow", "tags": ["time"] },
-
-    { "id": "p2-tamam", "deckId": "phase2", "type": "vocab", "az": "tamam", "en": "okay / alright", "tags": ["colloquial"] },
-    { "id": "p2-elbette", "deckId": "phase2", "type": "vocab", "az": "əlbəttə", "en": "of course", "tags": ["colloquial"] },
-    { "id": "p2-duzdu", "deckId": "phase2", "type": "vocab", "az": "düzdü", "en": "right / correct (casual)", "tags": ["colloquial"], "note": "Casual form of 'düzdür'." }
+    {
+      "id": "s-a",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "A a",
+      "az": "ata",
+      "en": "father (dad)",
+      "hook": "like the 'a' in 'father'",
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "s-b",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "B b",
+      "az": "balıq",
+      "en": "fish",
+      "hook": "like English 'b'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-c",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "C c",
+      "az": "cib",
+      "en": "pocket",
+      "hook": "the #1 reading trap: c = 'j' as in 'jam' [дж]",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-ch",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ç ç",
+      "az": "çay",
+      "en": "tea",
+      "hook": "ç = 'ch' as in 'chair' [ч]",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-d",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "D d",
+      "az": "dost",
+      "en": "friend",
+      "hook": "like English 'd'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-e",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "E e",
+      "az": "ev",
+      "en": "house",
+      "hook": "like the 'e' in 'bed'",
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "s-schwa",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ə ə",
+      "az": "əl",
+      "en": "hand",
+      "hook": "schwa — the most common vowel; like the 'a' in 'cat'",
+      "tags": [
+        "vowel",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-f",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "F f",
+      "az": "fil",
+      "en": "elephant",
+      "hook": "like English 'f'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-g",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "G g",
+      "az": "gül",
+      "en": "flower / rose",
+      "hook": "soft 'g' as in 'get'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-gh",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ğ ğ",
+      "az": "dağ",
+      "en": "mountain",
+      "hook": "soft, near-silent; it lengthens the vowel before it. Never starts a word.",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-h",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "H h",
+      "az": "hava",
+      "en": "air / weather",
+      "hook": "like English 'h'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-x",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "X x",
+      "az": "xala",
+      "en": "aunt (mother's sister)",
+      "hook": "x = 'kh', raspy back-of-throat [х]",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-dotless-i",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "I ı",
+      "az": "qız",
+      "en": "girl / daughter",
+      "hook": "dotless ı — back unrounded vowel [Russian ы]",
+      "tags": [
+        "vowel",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-dotted-i",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "İ i",
+      "az": "it",
+      "en": "dog",
+      "hook": "dotted i — like the 'ee' in 'see' (shorter)",
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "s-j",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "J j",
+      "az": "jurnal",
+      "en": "magazine",
+      "hook": "j = 'zh', like the 's' in 'measure' [ж]",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-k",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "K k",
+      "az": "kitab",
+      "en": "book",
+      "hook": "like English 'k'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-q",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Q q",
+      "az": "qardaş",
+      "en": "brother",
+      "hook": "q ≈ a hard 'g' made further back",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-l",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "L l",
+      "az": "limon",
+      "en": "lemon",
+      "hook": "like English 'l'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-m",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "M m",
+      "az": "mən",
+      "en": "I / me",
+      "hook": "like English 'm'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-n",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "N n",
+      "az": "nənə",
+      "en": "grandmother",
+      "hook": "like English 'n'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-o",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "O o",
+      "az": "od",
+      "en": "fire",
+      "hook": "like the 'o' in 'more' (no glide)",
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "s-oe",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ö ö",
+      "az": "ördək",
+      "en": "duck",
+      "hook": "rounded front vowel, like German ö",
+      "tags": [
+        "vowel",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-p",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "P p",
+      "az": "pul",
+      "en": "money",
+      "hook": "like English 'p'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-r",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "R r",
+      "az": "rəng",
+      "en": "colour",
+      "hook": "lightly rolled/tapped 'r'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-s",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "S s",
+      "az": "su",
+      "en": "water",
+      "hook": "like English 's'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-sh",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ş ş",
+      "az": "şəhər",
+      "en": "city",
+      "hook": "ş = 'sh' as in 'ship' [ш]",
+      "tags": [
+        "consonant",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-t",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "T t",
+      "az": "top",
+      "en": "ball",
+      "hook": "like English 't'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-u",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "U u",
+      "az": "uşaq",
+      "en": "child",
+      "hook": "like the 'oo' in 'boot'",
+      "tags": [
+        "vowel"
+      ]
+    },
+    {
+      "id": "s-ue",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Ü ü",
+      "az": "üzüm",
+      "en": "grapes",
+      "hook": "rounded front vowel, like German ü",
+      "tags": [
+        "vowel",
+        "tricky"
+      ]
+    },
+    {
+      "id": "s-v",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "V v",
+      "az": "vaxt",
+      "en": "time",
+      "hook": "like English 'v'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-y",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Y y",
+      "az": "yol",
+      "en": "road / way",
+      "hook": "like the 'y' in 'yes'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "s-z",
+      "deckId": "phase0",
+      "type": "sound",
+      "letter": "Z z",
+      "az": "zəng",
+      "en": "bell / phone call",
+      "hook": "like English 'z'",
+      "tags": [
+        "consonant"
+      ]
+    },
+    {
+      "id": "p1-men",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "mən",
+      "en": "I / me",
+      "tags": [
+        "pronoun"
+      ],
+      "ex": "Mən buradayam.",
+      "exEn": "I am here."
+    },
+    {
+      "id": "p1-sen",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "sən",
+      "en": "you (informal)",
+      "tags": [
+        "pronoun"
+      ],
+      "note": "Use with family and friends — perfect for Dad."
+    },
+    {
+      "id": "p1-o",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "o",
+      "en": "he / she / it",
+      "tags": [
+        "pronoun"
+      ],
+      "note": "No gender in Azerbaijani — 'o' covers he, she and it."
+    },
+    {
+      "id": "p1-biz",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "biz",
+      "en": "we",
+      "tags": [
+        "pronoun"
+      ]
+    },
+    {
+      "id": "p1-siz",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "siz",
+      "en": "you (plural / polite)",
+      "tags": [
+        "pronoun"
+      ]
+    },
+    {
+      "id": "p1-onlar",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "onlar",
+      "en": "they",
+      "tags": [
+        "pronoun"
+      ]
+    },
+    {
+      "id": "p1-ata",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "ata",
+      "en": "father / dad",
+      "tags": [
+        "family",
+        "heart"
+      ],
+      "ex": "Atam yaxşıdır.",
+      "exEn": "My dad is well."
+    },
+    {
+      "id": "p1-ana",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "ana",
+      "en": "mother / mum",
+      "tags": [
+        "family"
+      ],
+      "ex": "Anam evdədir.",
+      "exEn": "My mum is at home."
+    },
+    {
+      "id": "p1-qardas",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "qardaş",
+      "en": "brother",
+      "tags": [
+        "family"
+      ],
+      "ex": "Qardaşım var.",
+      "exEn": "I have a brother."
+    },
+    {
+      "id": "p1-baci",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "bacı",
+      "en": "sister",
+      "tags": [
+        "family"
+      ],
+      "ex": "Bacım var.",
+      "exEn": "I have a sister."
+    },
+    {
+      "id": "p1-ogul",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "oğul",
+      "en": "son",
+      "tags": [
+        "family"
+      ],
+      "ex": "Oğlum var.",
+      "exEn": "I have a son."
+    },
+    {
+      "id": "p1-qiz",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "qız",
+      "en": "daughter / girl",
+      "tags": [
+        "family"
+      ],
+      "ex": "Qızım var.",
+      "exEn": "I have a daughter."
+    },
+    {
+      "id": "p1-baba",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "baba",
+      "en": "grandfather",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-nene",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "nənə",
+      "en": "grandmother",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-aile",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "ailə",
+      "en": "family",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-usaq",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "uşaq",
+      "en": "child",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-arvad",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "arvad",
+      "en": "wife",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-er",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "ər",
+      "en": "husband",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "p1-salam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Salam",
+      "en": "Hello / Hi",
+      "tags": [
+        "greeting",
+        "heart"
+      ],
+      "pron": "sah-LAHM"
+    },
+    {
+      "id": "p1-sagol",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sağ ol",
+      "en": "Thank you / Thanks (informal)",
+      "tags": [
+        "greeting",
+        "heart"
+      ],
+      "pron": "sah OL"
+    },
+    {
+      "id": "p1-coxsagol",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Çox sağ ol",
+      "en": "Thank you very much",
+      "tags": [
+        "greeting"
+      ],
+      "pron": "CHOKH sah OL"
+    },
+    {
+      "id": "p1-sagolun",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sağ olun",
+      "en": "Thank you (polite)",
+      "tags": [
+        "greeting"
+      ],
+      "note": "The -un ending is the polite/plural form."
+    },
+    {
+      "id": "p1-necesen",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Necəsən?",
+      "en": "How are you? (informal)",
+      "tags": [
+        "greeting",
+        "heart"
+      ],
+      "pron": "neh-juh-SUHN"
+    },
+    {
+      "id": "p1-yaxsiyam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Yaxşıyam",
+      "en": "I'm good / I'm fine",
+      "tags": [
+        "greeting",
+        "heart"
+      ],
+      "note": "yaxşı (good) + -yam (I am).",
+      "pron": "yah-shuh-YAHM"
+    },
+    {
+      "id": "p1-beli",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "bəli",
+      "en": "yes",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-he",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "hə",
+      "en": "yeah (casual yes)",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-yox",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "yox",
+      "en": "no",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-yaxsi",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "yaxşı",
+      "en": "good / fine / okay",
+      "tags": [
+        "basic"
+      ],
+      "ex": "Mən yaxşıyam.",
+      "exEn": "I am good."
+    },
+    {
+      "id": "p1-pis",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "pis",
+      "en": "bad",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-bagisla",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Bağışla",
+      "en": "Sorry / Excuse me",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-zehmet",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Zəhmət olmasa",
+      "en": "Please",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "p1-sabah",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sabahın xeyir",
+      "en": "Good morning",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "p1-axsam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Axşamın xeyir",
+      "en": "Good evening",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "p1-sevmek",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "sevirəm",
+      "en": "I love",
+      "tags": [
+        "verb",
+        "heart"
+      ],
+      "note": "From sevmək (to love).",
+      "ex": "Səni sevirəm.",
+      "exEn": "I love you."
+    },
+    {
+      "id": "p1-istemek",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "istəyirəm",
+      "en": "I want",
+      "tags": [
+        "verb"
+      ],
+      "note": "From istəmək (to want).",
+      "ex": "Çay istəyirəm.",
+      "exEn": "I want tea."
+    },
+    {
+      "id": "p1-bilmek",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "bilirəm",
+      "en": "I know",
+      "tags": [
+        "verb"
+      ],
+      "note": "From bilmək (to know).",
+      "ex": "Mən bilirəm.",
+      "exEn": "I know."
+    },
+    {
+      "id": "p1-seni-sevirem",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Səni sevirəm",
+      "en": "I love you",
+      "tags": [
+        "heart"
+      ],
+      "note": "səni (you, object) + sevirəm (I love).",
+      "pron": "suh-NEE seh-vee-REHM"
+    },
+    {
+      "id": "p1-sen-atamsan",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sən mənim atamsan",
+      "en": "You are my father",
+      "tags": [
+        "heart"
+      ],
+      "note": "mənim (my) + ata + -m (my) + -san (you are)."
+    },
+    {
+      "id": "p1-men-buradayam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Mən buradayam",
+      "en": "I am here",
+      "tags": [
+        "phrase"
+      ]
+    },
+    {
+      "id": "p1-darixmisam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Darıxmışam",
+      "en": "I've missed you",
+      "tags": [
+        "heart"
+      ],
+      "note": "Everyday way to say it. More literary: 'Səndən ötrü darıxmışam'.",
+      "pron": "dah-ruhkh-muh-SHAHM"
+    },
+    {
+      "id": "p1-dede",
+      "deckId": "phase1",
+      "type": "vocab",
+      "az": "dədə",
+      "en": "dad (affectionate)",
+      "tags": [
+        "family",
+        "heart"
+      ],
+      "note": "Warm word for father; in some regions it means grandfather.",
+      "pron": "duh-DUH"
+    },
+    {
+      "id": "p1-pair-yaxsiyam",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sağ ol, yaxşıyam",
+      "en": "Thanks, I'm good",
+      "tags": [
+        "greeting",
+        "pair"
+      ],
+      "note": "Natural reply to 'Necəsən?'"
+    },
+    {
+      "id": "p1-pair-senecesen",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Bəs sən necəsən?",
+      "en": "And how are you?",
+      "tags": [
+        "greeting",
+        "pair"
+      ],
+      "note": "Turn the question back to Dad."
+    },
+    {
+      "id": "p1-pair-pisdeyilem",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Pis deyiləm",
+      "en": "Not bad",
+      "tags": [
+        "greeting",
+        "pair"
+      ]
+    },
+    {
+      "id": "p1-pair-senede",
+      "deckId": "phase1",
+      "type": "phrase",
+      "az": "Sənə də",
+      "en": "You too",
+      "tags": [
+        "greeting",
+        "pair"
+      ],
+      "note": "Reply to a good wish, e.g. 'Sabahın xeyir' → 'Sənə də'."
+    },
+    {
+      "id": "l1-salam",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "Salam",
+      "en": "Hello / Hi",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "l1-necesen",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "Necəsən?",
+      "en": "How are you?",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "l1-yaxsiyam",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "Yaxşıyam",
+      "en": "I'm good",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "l1-ata",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "ata",
+      "en": "father / dad",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "l1-ana",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "ana",
+      "en": "mother / mum",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "l1-sevirem",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "Səni sevirəm",
+      "en": "I love you",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "l1-sagol",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "Sağ ol",
+      "en": "Thanks",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "l1-beli-yox",
+      "deckId": "listening1",
+      "type": "listening",
+      "az": "bəli",
+      "en": "yes",
+      "tags": [
+        "basic"
+      ]
+    },
+    {
+      "id": "dad-salam-ata",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Salam, ata!",
+      "en": "Hi, Dad!",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-necesen",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Necəsən?",
+      "en": "How are you?",
+      "tags": [
+        "heart"
+      ],
+      "pron": "neh-juh-SUHN"
+    },
+    {
+      "id": "dad-yaxsiyam",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Yaxşıyam.",
+      "en": "I'm good.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-sagol",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Sağ ol.",
+      "en": "Thanks.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-beli-yox",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Bəli / Yox",
+      "en": "Yes / No",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-seni-sevirem",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Səni sevirəm, ata.",
+      "en": "I love you, Dad.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "suh-NEE seh-vee-REHM, ah-TAH"
+    },
+    {
+      "id": "dad-oyrenirem",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Mən Azərbaycan dilini öyrənirəm.",
+      "en": "I'm learning Azerbaijani.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-danismaq",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Səninlə danışmaq istəyirəm.",
+      "en": "I want to talk with you.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-biraz",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Bir az Azərbaycanca bilirəm.",
+      "en": "I know a little Azerbaijani.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "dad-basa-dusurem",
+      "deckId": "dad",
+      "type": "dad",
+      "az": "Mən səni başa düşürəm.",
+      "en": "I understand you.",
+      "tags": [
+        "heart"
+      ]
+    },
+    {
+      "id": "p2-bir",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "bir",
+      "en": "one (1)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-iki",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "iki",
+      "en": "two (2)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-uc",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "üç",
+      "en": "three (3)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-dord",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "dörd",
+      "en": "four (4)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-bes",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "beş",
+      "en": "five (5)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-su",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "su",
+      "en": "water",
+      "tags": [
+        "food"
+      ],
+      "ex": "Su istəyirəm.",
+      "exEn": "I want water."
+    },
+    {
+      "id": "p2-corek",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "çörək",
+      "en": "bread",
+      "tags": [
+        "food"
+      ],
+      "ex": "Çörək istəyirəm.",
+      "exEn": "I want bread."
+    },
+    {
+      "id": "p2-cay",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "çay",
+      "en": "tea",
+      "tags": [
+        "food"
+      ],
+      "ex": "Çay istəyirəm.",
+      "exEn": "I want tea."
+    },
+    {
+      "id": "p2-ne",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "nə",
+      "en": "what",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-kim",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "kim",
+      "en": "who",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-harada",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "harada",
+      "en": "where",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-var",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "var",
+      "en": "there is / I have",
+      "tags": [
+        "verb"
+      ],
+      "note": "Azerbaijani uses 'var' (exists) for having: 'Pulum var' = I have money."
+    },
+    {
+      "id": "p2-yox-yoxdu",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "yoxdu",
+      "en": "there isn't / I don't have",
+      "tags": [
+        "verb"
+      ],
+      "note": "Opposite of 'var': 'Vaxtım yoxdu' = I don't have time."
+    },
+    {
+      "id": "p2-alti",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "altı",
+      "en": "six (6)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-yeddi",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "yeddi",
+      "en": "seven (7)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-sekkiz",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "səkkiz",
+      "en": "eight (8)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-doqquz",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "doqquz",
+      "en": "nine (9)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-on",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "on",
+      "en": "ten (10)",
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "p2-niye",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "niyə",
+      "en": "why",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-nece",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "necə",
+      "en": "how",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-nevaxt",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "nə vaxt",
+      "en": "when",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-hansi",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "hansı",
+      "en": "which",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "p2-ve",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "və",
+      "en": "and",
+      "tags": [
+        "connector"
+      ]
+    },
+    {
+      "id": "p2-amma",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "amma",
+      "en": "but",
+      "tags": [
+        "connector"
+      ]
+    },
+    {
+      "id": "p2-cunki",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "çünki",
+      "en": "because",
+      "tags": [
+        "connector"
+      ]
+    },
+    {
+      "id": "p2-sonra",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "sonra",
+      "en": "then / after",
+      "tags": [
+        "connector"
+      ]
+    },
+    {
+      "id": "p2-gedirem",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "gedirəm",
+      "en": "I go / I'm going",
+      "tags": [
+        "verb"
+      ],
+      "note": "From getmək (to go).",
+      "ex": "Evə gedirəm.",
+      "exEn": "I'm going home."
+    },
+    {
+      "id": "p2-gelirem",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "gəlirəm",
+      "en": "I come / I'm coming",
+      "tags": [
+        "verb"
+      ],
+      "note": "From gəlmək (to come).",
+      "ex": "İndi gəlirəm.",
+      "exEn": "I'm coming now."
+    },
+    {
+      "id": "p2-gorurem",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "görürəm",
+      "en": "I see",
+      "tags": [
+        "verb"
+      ],
+      "note": "From görmək (to see).",
+      "ex": "Səni görürəm.",
+      "exEn": "I see you."
+    },
+    {
+      "id": "p2-edirem",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "edirəm",
+      "en": "I do / I make",
+      "tags": [
+        "verb"
+      ],
+      "note": "From etmək (to do)."
+    },
+    {
+      "id": "p2-bugun",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "bu gün",
+      "en": "today",
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "p2-indi",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "indi",
+      "en": "now",
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "p2-sabah",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "sabah",
+      "en": "tomorrow",
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "p2-tamam",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "tamam",
+      "en": "okay / alright",
+      "tags": [
+        "colloquial"
+      ]
+    },
+    {
+      "id": "p2-elbette",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "əlbəttə",
+      "en": "of course",
+      "tags": [
+        "colloquial"
+      ]
+    },
+    {
+      "id": "p2-duzdu",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "düzdü",
+      "en": "right / correct (casual)",
+      "tags": [
+        "colloquial"
+      ],
+      "note": "Casual form of 'düzdür'."
+    },
+    {
+      "id": "pat-isteyirem",
+      "deckId": "patterns",
+      "type": "cloze",
+      "cloze": "___ istəyirəm.",
+      "az": "Su istəyirəm.",
+      "en": "I want ___ (water).",
+      "note": "Swap the noun: Çay istəyirəm · Çörək istəyirəm.",
+      "tags": [
+        "pattern"
+      ]
+    },
+    {
+      "id": "pat-var",
+      "deckId": "patterns",
+      "type": "cloze",
+      "cloze": "___ var.",
+      "az": "Pulum var.",
+      "en": "I have ___ (money).",
+      "note": "Add -ım/-im to the noun: Vaxtım var · Sualım var.",
+      "tags": [
+        "pattern"
+      ]
+    },
+    {
+      "id": "pat-yoxdu",
+      "deckId": "patterns",
+      "type": "cloze",
+      "cloze": "___ yoxdu.",
+      "az": "Vaxtım yoxdu.",
+      "en": "I don't have ___ (time).",
+      "note": "The opposite of var: Pulum yoxdu.",
+      "tags": [
+        "pattern"
+      ]
+    },
+    {
+      "id": "pat-sevirem",
+      "deckId": "patterns",
+      "type": "cloze",
+      "cloze": "Səni ___.",
+      "az": "Səni sevirəm.",
+      "en": "I ___ you (love).",
+      "note": "Try: Səni görürəm (I see you).",
+      "tags": [
+        "pattern"
+      ]
+    },
+    {
+      "id": "pat-gedirem",
+      "deckId": "patterns",
+      "type": "cloze",
+      "cloze": "___ gedirəm.",
+      "az": "Evə gedirəm.",
+      "en": "I'm going ___ (home).",
+      "note": "Dative -ə/-a marks the destination.",
+      "tags": [
+        "pattern"
+      ]
+    },
+    {
+      "id": "dlg-hello-1",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Salam, ata!",
+      "en": "Hi, Dad!",
+      "scene": "Phone hello",
+      "role": "you",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-2",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Salam, oğlum!",
+      "en": "Hi, son!",
+      "scene": "Phone hello",
+      "role": "dad",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-3",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Necəsən?",
+      "en": "How are you?",
+      "scene": "Phone hello",
+      "role": "you",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-4",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Yaxşıyam, sağ ol. Sən necəsən?",
+      "en": "I'm good, thanks. And you?",
+      "scene": "Phone hello",
+      "role": "dad",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-5",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Mən də yaxşıyam.",
+      "en": "I'm good too.",
+      "scene": "Phone hello",
+      "role": "you",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-6",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Səni sevirəm, ata.",
+      "en": "I love you, Dad.",
+      "scene": "Phone hello",
+      "role": "you",
+      "tags": [
+        "dialogue"
+      ]
+    },
+    {
+      "id": "dlg-hello-7",
+      "deckId": "dialogues",
+      "type": "phrase",
+      "az": "Mən də səni sevirəm.",
+      "en": "I love you too.",
+      "scene": "Phone hello",
+      "role": "dad",
+      "tags": [
+        "dialogue"
+      ]
+    }
   ]
 }

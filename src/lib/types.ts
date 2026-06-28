@@ -6,6 +6,7 @@ export type CardType =
   | 'phrase' // whole useful sentence / chunk
   | 'listening' // hear Azeri audio -> recall meaning
   | 'dad' // user-added "Phrases for Dad"
+  | 'cloze' // fill-in-the-blank productive pattern
 
 /** A deck groups cards, usually by curriculum phase. */
 export interface Deck {
@@ -36,6 +37,18 @@ export interface SeedCard {
   hook?: string
   /** If false, no audio is expected for this card. Defaults to true when `az` exists. */
   hasAudio?: boolean
+  /** Optional example sentence in Azerbaijani (reuses already-taught words). */
+  ex?: string
+  /** English gloss of the example sentence. */
+  exEn?: string
+  /** Optional pronunciation respelling, e.g. "neh-juh-SUHN" (CAPS = stress). */
+  pron?: string
+  /** Cloze cards only: the prompt sentence with a ___ blank shown on the front. */
+  cloze?: string
+  /** Dialogue cards: which scene this turn belongs to (groups a conversation). */
+  scene?: string
+  /** Dialogue cards: who speaks this line. */
+  role?: 'you' | 'dad'
 }
 
 export interface SeedFile {

@@ -118,6 +118,8 @@ button {
   border-radius: 999px;
   letter-spacing: 0.03em;
 }
+.flashcard.you-turn { border-color: var(--heart); box-shadow: 0 0 0 1px var(--heart) inset; }
+
 .front-text { font-size: 2rem; font-weight: 700; }
 .back-az { font-size: 2.4rem; font-weight: 800; color: var(--accent-2); }
 .back-en { font-size: 1.3rem; color: var(--text); }
@@ -131,6 +133,24 @@ button {
   border-top: 1px solid var(--line);
   padding-top: 12px;
 }
+.pron { color: var(--muted); font-size: 1rem; letter-spacing: 0.02em; margin-top: -6px; }
+.example {
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  max-width: 34ch;
+}
+.example-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.example-az { font-size: 1.15rem; font-weight: 600; color: var(--accent-2); }
+.example-en { color: var(--muted); font-size: 0.95rem; margin-top: 4px; }
+
 .tag-row { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 .tag {
   font-size: 0.72rem;

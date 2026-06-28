@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getAllReviews, getAllStates } from '../lib/db'
-import type { CardState, ReviewLog } from '../lib/types'
+import { getAllReviews, getAllStates, updateBestStreak } from '../lib/db'
+import { computeStreak } from '../lib/streak'
+import type { CardState } from '../lib/types'
 
 interface Computed {
   due: number
@@ -8,30 +9,11 @@ interface Computed {
   introduced: number
   total: number
   streak: number
+  bestStreak: number
+  bridged: boolean
   reviews7: number
   retention: number | null
   leeches: number
-}
-
-const dayKey = (ms: number): string => {
-  const d = new Date(ms)
-  return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
-}
-
-function computeStreak(reviews: ReviewLog[]): number {
-  if (reviews.length === 0) return 0
-  const days = new Set(reviews.map((r) => dayKey(r.at)))
-  let streak = 0
-  const cursor = new Date()
-  // If nothing today yet, the streak can still be alive from yesterday.
-  if (!days.has(dayKey(cursor.getTime()))) {
-    cursor.setDate(cursor.getDate() - 1)
-  }
-  while (days.has(dayKey(cursor.getTime()))) {
-    streak += 1
-    cursor.setDate(cursor.getDate() - 1)
-  }
-  return streak
 }
 
 export default function Stats() {
@@ -50,12 +32,16 @@ export default function Stats() {
       const passed = recent.filter((r) => r.grade !== 'again')
       const retention = recent.length > 0 ? Math.round((passed.length / recent.length) * 100) : null
       void matured
+      const { current: streak, bridged } = computeStreak(reviews.map((r) => r.at), now)
+      const bestStreak = await updateBestStreak(streak)
       setC({
         due,
         learned,
         introduced: introduced.length,
         total: states.length,
-        streak: computeStreak(reviews),
+        streak,
+        bestStreak,
+        bridged,
         reviews7: recent.length,
         retention,
         leeches: states.filter((s) => s.leech).length,
@@ -77,9 +63,15 @@ export default function Stats() {
       <h1>Stats</h1>
       <p className="subtitle">Small and steady wins. 10–15 minutes a day adds up fast.</p>
 
-      <div style={{ marginBottom: 18 }}>
+      <div style={{ marginBottom: 18, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         <span className="streak-pill">🔥 {c.streak}-day streak</span>
+        {c.bestStreak > 0 && <span className="streak-pill">🏆 best {c.bestStreak}</span>}
       </div>
+      {c.bridged && (
+        <div className="banner" style={{ marginBottom: 18 }}>
+          ❄️ A streak freeze covered a missed day — you're still going!
+        </div>
+      )}
 
       <div className="stat-grid">
         <div className="stat-box">

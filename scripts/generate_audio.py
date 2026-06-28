@@ -38,12 +38,20 @@ def main() -> int:
         seed = json.load(f)
 
     os.makedirs(OUT_DIR, exist_ok=True)
-    targets = [c for c in seed["cards"] if c.get("az") and c.get("hasAudio") is not False]
-    print(f"gTTS · {len(targets)} cards · out: {OUT_DIR}")
+    # One clip per Azerbaijani text, plus one per example sentence (<id>.ex.mp3).
+    jobs = []
+    for c in seed["cards"]:
+        if c.get("hasAudio") is False:
+            continue
+        if c.get("az"):
+            jobs.append((c["id"], c["az"]))
+        if c.get("ex"):
+            jobs.append((f"{c['id']}.ex", c["ex"]))
+    print(f"gTTS · {len(jobs)} clips · out: {OUT_DIR}")
 
     made = skipped = failed = 0
-    for card in targets:
-        out = os.path.join(OUT_DIR, f"{card['id']}.mp3")
+    for name, text in jobs:
+        out = os.path.join(OUT_DIR, f"{name}.mp3")
         if not FORCE and os.path.exists(out) and os.path.getsize(out) > 0:
             skipped += 1
             continue
@@ -53,27 +61,27 @@ def main() -> int:
         ok = False
         for attempt in range(3):
             try:
-                gTTS(text=card["az"], lang="az", lang_check=False).save(out)
+                gTTS(text=text, lang="az", lang_check=False).save(out)
                 ok = True
                 break
             except Exception as err:  # noqa: BLE001
                 wait = 1.5 * (attempt + 1)
-                print(f"  … retry {card['id']} in {wait:.1f}s ({err})", file=sys.stderr)
+                print(f"  … retry {name} in {wait:.1f}s ({err})", file=sys.stderr)
                 time.sleep(wait)
         if ok:
             made += 1
-            print(f"  ✓ {card['id']}  {card['az']}")
+            print(f"  ✓ {name}  {text}")
             time.sleep(0.4)  # be gentle on the endpoint
         else:
             failed += 1
             # Drop any empty/partial file so the app treats it as "no audio".
             if os.path.exists(out) and os.path.getsize(out) == 0:
                 os.remove(out)
-            print(f"  ✗ {card['id']}  {card['az']} (giving up)", file=sys.stderr)
+            print(f"  ✗ {name}  {text} (giving up)", file=sys.stderr)
 
     print(f"Done. {made} generated, {skipped} already present, {failed} failed.")
     # Succeed as long as we produced most of the audio; a few misses are fine.
-    return 1 if targets and made == 0 and failed > 0 else 0
+    return 1 if jobs and made == 0 and failed > 0 else 0
 
 
 if __name__ == "__main__":

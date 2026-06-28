@@ -10,23 +10,28 @@ import { playCard } from '../lib/audio'
 import AudioButton from '../components/AudioButton'
 import type { SeedCard } from '../lib/types'
 
-type Mode = 'list' | 'drill'
+type Mode = 'list' | 'drill' | 'scene'
 
 export default function TalkToDad() {
   const [cards, setCards] = useState<SeedCard[]>([])
+  const [dialogues, setDialogues] = useState<SeedCard[]>([])
   const [goals, setGoals] = useState<string[]>([])
   const [audioEnabled, setAudioEnabled] = useState(true)
   const [mode, setMode] = useState<Mode>('list')
   const [drillIdx, setDrillIdx] = useState(0)
   const [revealed, setRevealed] = useState(false)
+  const [scene, setScene] = useState<string | null>(null)
+  const [sceneIdx, setSceneIdx] = useState(0)
 
   const load = async () => {
-    const [dadCards, g, settings] = await Promise.all([
+    const [dadCards, dlg, g, settings] = await Promise.all([
       getCardsByDeck('dad'),
+      getCardsByDeck('dialogues'),
       getDadGoals(),
       getSettings(),
     ])
     setCards(dadCards)
+    setDialogues(dlg.sort((a, b) => a.id.localeCompare(b.id)))
     setGoals(g)
     setAudioEnabled(settings.audioEnabled)
   }
@@ -37,11 +42,32 @@ export default function TalkToDad() {
 
   const goalCards = useMemo(() => cards.filter((c) => goals.includes(c.id)), [cards, goals])
 
+  const scenes = useMemo(() => {
+    const map = new Map<string, SeedCard[]>()
+    for (const c of dialogues) {
+      if (!c.scene) continue
+      const arr = map.get(c.scene) ?? []
+      arr.push(c)
+      map.set(c.scene, arr)
+    }
+    return map
+  }, [dialogues])
+
+  const sceneCards = scene ? scenes.get(scene) ?? [] : []
+
   const flip = async (id: string) => {
     setGoals(await toggleDadGoal(id))
   }
 
-  // ---- Drill mode ----
+  const startScene = (name: string) => {
+    setScene(name)
+    setSceneIdx(0)
+    setMode('scene')
+    const first = scenes.get(name)?.[0]
+    if (first) setTimeout(() => void playCard(first, audioEnabled), 200)
+  }
+
+  // ---- Goal drill mode ----
   if (mode === 'drill' && goalCards.length > 0) {
     const card = goalCards[drillIdx % goalCards.length]
     const next = () => {
@@ -90,11 +116,63 @@ export default function TalkToDad() {
     )
   }
 
+  // ---- Conversation (scene) mode ----
+  if (mode === 'scene' && sceneCards.length > 0) {
+    const turn = sceneCards[sceneIdx]
+    const isYou = turn.role === 'you'
+    const atEnd = sceneIdx >= sceneCards.length - 1
+    const go = (i: number) => {
+      setSceneIdx(i)
+      const t = sceneCards[i]
+      if (t) setTimeout(() => void playCard(t, audioEnabled), 150)
+    }
+    return (
+      <div className="screen">
+        <div className="row" style={{ marginBottom: 12 }}>
+          <h1 style={{ fontSize: '1.2rem' }}>📞 {scene}</h1>
+          <button className="tag" onClick={() => setMode('list')}>
+            Done
+          </button>
+        </div>
+        <div className="muted small" style={{ marginBottom: 10 }}>
+          Turn {sceneIdx + 1} / {sceneCards.length}
+        </div>
+        <div className={`flashcard${isYou ? ' you-turn' : ''}`}>
+          <span className="prompt-label">{isYou ? '🗣️ Your line — say it!' : '👨 Dad says'}</span>
+          <div className="back-az az">{turn.az}</div>
+          <div className="back-en">{turn.en}</div>
+          <AudioButton card={turn} enabled={audioEnabled} />
+        </div>
+        <div className="grade-row" style={{ gridTemplateColumns: '1fr 2fr', marginTop: 18 }}>
+          <button
+            className="btn secondary"
+            disabled={sceneIdx === 0}
+            onClick={() => go(sceneIdx - 1)}
+          >
+            ◀ Back
+          </button>
+          {atEnd ? (
+            <button className="btn" onClick={() => setMode('list')}>
+              Finish ✓
+            </button>
+          ) : (
+            <button className="btn" onClick={() => go(sceneIdx + 1)}>
+              Next ▶
+            </button>
+          )}
+        </div>
+        <p className="muted small" style={{ marginTop: 14, textAlign: 'center' }}>
+          Play it through, saying your lines out loud — then call Dad and try it for real.
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className="screen">
       <h1>❤️ Talk to Dad</h1>
       <p className="subtitle">
-        Flag the phrases you most want to say to Dad, then drill them to fluency.
+        Flag the phrases you most want to say, drill them, and rehearse whole conversations.
       </p>
 
       {goalCards.length > 0 && (
@@ -103,6 +181,26 @@ export default function TalkToDad() {
         </button>
       )}
 
+      {scenes.size > 0 && (
+        <>
+          <h2>Conversations</h2>
+          {[...scenes.entries()].map(([name, turns]) => (
+            <div className="list-card" key={name}>
+              <div className="row">
+                <div>
+                  <strong>📞 {name}</strong>
+                  <div className="muted small">{turns.length} turns</div>
+                </div>
+                <button className="btn" style={{ width: 'auto', padding: '10px 16px' }} onClick={() => startScene(name)}>
+                  ▶ Run
+                </button>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      <h2>Your phrases</h2>
       {cards.length === 0 && (
         <div className="list-card">
           <p className="muted">

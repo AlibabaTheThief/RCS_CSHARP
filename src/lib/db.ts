@@ -82,28 +82,44 @@ export async function saveSettings(settings: Settings): Promise<void> {
   await db.put('meta', settings, 'settings')
 }
 
-/** Load the bundled seed into the DB if it has not been loaded yet. */
+/**
+ * Load/merge the bundled seed. On first launch it seeds everything; on later
+ * launches it refreshes static card/deck *content* (so fixes and new fields
+ * reach existing installs) and adds any brand-new cards/decks — all without
+ * touching the user's scheduling state or their own "Phrases for Dad".
+ */
 export async function ensureSeeded(seed: SeedFile): Promise<void> {
   const settings = await getSettings()
-  if (settings.seeded) return
-
   const db = await getDB()
   const now = Date.now()
+
+  const knownCardIds = new Set(await db.getAllKeys('cards'))
+  const knownDeckIds = new Set((await db.getAllKeys('decks')).map(String))
+
   const tx = db.transaction(['cards', 'states', 'decks'], 'readwrite')
 
   for (const deck of seed.decks) {
-    await tx.objectStore('decks').put({ ...deck, enabled: deck.enabledByDefault })
+    if (knownDeckIds.has(deck.id)) {
+      // Refresh metadata but preserve the user's enabled choice.
+      const current = (await tx.objectStore('decks').get(deck.id)) as StoredDeck | undefined
+      await tx.objectStore('decks').put({ ...deck, enabled: current?.enabled ?? deck.enabledByDefault })
+    } else {
+      await tx.objectStore('decks').put({ ...deck, enabled: deck.enabledByDefault })
+    }
   }
+
   for (const card of seed.cards) {
+    // Always refresh content; only create a fresh state for brand-new cards.
     await tx.objectStore('cards').put(card)
-    // States start un-introduced; the daily queue introduces them gradually.
-    const state = newCardState(card.id, card.deckId, now)
-    state.introduced = false
-    await tx.objectStore('states').put(state)
+    if (!knownCardIds.has(card.id)) {
+      const state = newCardState(card.id, card.deckId, now)
+      state.introduced = false // queue introduces it gradually
+      await tx.objectStore('states').put(state)
+    }
   }
   await tx.done
 
-  await saveSettings({ ...settings, seeded: true })
+  if (!settings.seeded) await saveSettings({ ...settings, seeded: true })
 }
 
 export async function getDecks(): Promise<StoredDeck[]> {
@@ -179,6 +195,23 @@ export async function addDadPhrase(az: string, en: string, note?: string): Promi
   await tx.objectStore('states').put(newCardState(id, 'dad', now))
   await tx.done
   return card
+}
+
+/** Best streak ever reached, persisted in meta. */
+export async function getBestStreak(): Promise<number> {
+  const db = await getDB()
+  return ((await db.get('meta', 'bestStreak')) as number | undefined) ?? 0
+}
+
+/** Record a new streak high-water mark; returns the (possibly updated) best. */
+export async function updateBestStreak(current: number): Promise<number> {
+  const db = await getDB()
+  const best = await getBestStreak()
+  if (current > best) {
+    await db.put('meta', current, 'bestStreak')
+    return current
+  }
+  return best
 }
 
 /** Cards the user has flagged as "Talk to Dad" goals (kept in meta). */

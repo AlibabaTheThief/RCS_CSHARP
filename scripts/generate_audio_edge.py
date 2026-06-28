@@ -54,27 +54,36 @@ async def main() -> int:
         seed = json.load(f)
 
     os.makedirs(OUT_DIR, exist_ok=True)
-    targets = [c for c in seed["cards"] if c.get("az") and c.get("hasAudio") is not False]
-    print(f"edge-tts ({VOICE}) · {len(targets)} cards · out: {OUT_DIR}")
+    # Each card yields one clip for its Azerbaijani text, plus one for its
+    # example sentence (<id>.ex.mp3) when present.
+    jobs = []
+    for c in seed["cards"]:
+        if c.get("hasAudio") is False:
+            continue
+        if c.get("az"):
+            jobs.append((c["id"], c["az"]))
+        if c.get("ex"):
+            jobs.append((f"{c['id']}.ex", c["ex"]))
+    print(f"edge-tts ({VOICE}) · {len(jobs)} clips · out: {OUT_DIR}")
 
     made = skipped = failed = 0
-    for card in targets:
-        out = os.path.join(OUT_DIR, f"{card['id']}.mp3")
+    for name, text in jobs:
+        out = os.path.join(OUT_DIR, f"{name}.mp3")
         if not FORCE and os.path.exists(out) and os.path.getsize(out) > 0:
             skipped += 1
             continue
-        if await synth(edge_tts, card["az"], out):
+        if await synth(edge_tts, text, out):
             made += 1
-            print(f"  ✓ {card['id']}  {card['az']}")
+            print(f"  ✓ {name}  {text}")
         else:
             failed += 1
             if os.path.exists(out) and os.path.getsize(out) == 0:
                 os.remove(out)
-            print(f"  ✗ {card['id']}  {card['az']} (giving up)", file=sys.stderr)
+            print(f"  ✗ {name}  {text} (giving up)", file=sys.stderr)
 
     print(f"Done. {made} generated, {skipped} already present, {failed} failed.")
     # Fail only if we produced nothing at all (so the build can fall back).
-    return 1 if targets and made == 0 and failed > 0 else 0
+    return 1 if jobs and made == 0 and failed > 0 else 0
 
 
 if __name__ == "__main__":

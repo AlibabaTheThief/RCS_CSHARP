@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import type { SeedCard } from '../lib/types'
-import { playCard } from '../lib/audio'
+import { exampleAudioUrlFor, playCard, playExample } from '../lib/audio'
 import AudioButton from './AudioButton'
 
 interface Props {
@@ -15,11 +15,13 @@ interface Props {
  * and the card's type. Direction by type:
  *   sound     → letter + hook, then example word + audio
  *   listening → audio only (autoplays), then Azeri + English
+ *   cloze     → fill-in-the-blank prompt, then the full Azeri + audio
  *   vocab / phrase / dad → English prompt, then Azeri + audio (production)
  */
 export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props) {
   const isSound = card.type === 'sound'
   const isListening = card.type === 'listening'
+  const isCloze = card.type === 'cloze'
 
   // Listening cards autoplay on show and again on reveal.
   useEffect(() => {
@@ -30,15 +32,20 @@ export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props
     ? 'Letter'
     : isListening
       ? 'Listen — what does it mean?'
-      : 'English → say it in Azerbaijani'
+      : isCloze
+        ? 'Fill the gap — say it in Azerbaijani'
+        : 'English → say it in Azerbaijani'
 
   return (
     <div className="flashcard">
       <span className="prompt-label">{promptLabel}</span>
       {isNew && <span className="new-badge">NEW</span>}
 
-      {!revealed && <FrontSide card={card} isSound={isSound} isListening={isListening} audioEnabled={audioEnabled} />}
-      {revealed && <BackSide card={card} isSound={isSound} audioEnabled={audioEnabled} />}
+      {!revealed ? (
+        <FrontSide card={card} isSound={isSound} isListening={isListening} isCloze={isCloze} audioEnabled={audioEnabled} />
+      ) : (
+        <BackSide card={card} audioEnabled={audioEnabled} />
+      )}
     </div>
   )
 }
@@ -47,11 +54,13 @@ function FrontSide({
   card,
   isSound,
   isListening,
+  isCloze,
   audioEnabled,
 }: {
   card: SeedCard
   isSound: boolean
   isListening: boolean
+  isCloze: boolean
   audioEnabled: boolean
 }) {
   if (isSound) {
@@ -70,33 +79,46 @@ function FrontSide({
       </>
     )
   }
+  if (isCloze) {
+    return (
+      <>
+        <div className="front-text az">{card.cloze}</div>
+        <div className="hook">{card.en}</div>
+      </>
+    )
+  }
   return <div className="front-text">{card.en}</div>
 }
 
-function BackSide({
-  card,
-  isSound,
-  audioEnabled,
-}: {
-  card: SeedCard
-  isSound: boolean
-  audioEnabled: boolean
-}) {
+function BackSide({ card, audioEnabled }: { card: SeedCard; audioEnabled: boolean }) {
+  const hasExample = !!card.ex && exampleAudioUrlFor(card) !== null
   return (
     <>
-      {isSound ? (
-        <>
-          <div className="back-az az">{card.az}</div>
-          <div className="back-en">{card.en}</div>
-        </>
-      ) : (
-        <>
-          <div className="back-az az">{card.az}</div>
-          <div className="back-en">{card.en}</div>
-        </>
-      )}
+      <div className="back-az az">{card.az}</div>
+      {card.pron && <div className="pron">{card.pron}</div>}
+      <div className="back-en">{card.en}</div>
 
       <AudioButton card={card} enabled={audioEnabled} />
+
+      {card.ex && (
+        <div className="example">
+          <span className="example-label">In a sentence</span>
+          <div className="row" style={{ gap: 8, justifyContent: 'center' }}>
+            <span className="example-az az">{card.ex}</span>
+            {hasExample && (
+              <button
+                className="audio-btn small"
+                onClick={() => void playExample(card, audioEnabled)}
+                aria-label="Play example"
+                title="Play example"
+              >
+                🔊
+              </button>
+            )}
+          </div>
+          {card.exEn && <div className="example-en">{card.exEn}</div>}
+        </div>
+      )}
 
       {card.note && <div className="note">{card.note}</div>}
 
