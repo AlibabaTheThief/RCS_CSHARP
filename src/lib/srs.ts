@@ -113,6 +113,20 @@ export function schedule(card: CardState, grade: Grade, now: number): CardState 
   return next
 }
 
+/**
+ * Apply a review and mark the card as introduced into the rotation on its first
+ * study. Use this from the UI instead of `schedule` directly so the new-card
+ * throttle and "started" counts stay correct.
+ */
+export function review(card: CardState, grade: Grade, now: number): CardState {
+  const next = schedule(card, grade, now)
+  if (!card.introduced) {
+    next.introduced = true
+    next.introducedAt = now
+  }
+  return next
+}
+
 /** Graduate a learning card into the review phase. */
 function graduate(card: CardState, now: number, days: number): CardState {
   return {

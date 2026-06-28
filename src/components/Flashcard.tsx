@@ -33,8 +33,8 @@ export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props
     : isListening
       ? 'Listen — what does it mean?'
       : isCloze
-        ? 'Fill the gap — say it in Azerbaijani'
-        : 'English → say it in Azerbaijani'
+        ? 'Fill the gap'
+        : 'English → Azerbaijani'
 
   return (
     <div className="flashcard">
@@ -44,7 +44,9 @@ export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props
       {!revealed ? (
         <FrontSide card={card} isSound={isSound} isListening={isListening} isCloze={isCloze} audioEnabled={audioEnabled} />
       ) : (
-        <BackSide card={card} audioEnabled={audioEnabled} />
+        <div className="card-face">
+          <BackSide card={card} audioEnabled={audioEnabled} />
+        </div>
       )}
     </div>
   )

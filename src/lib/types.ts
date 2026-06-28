@@ -80,6 +80,8 @@ export interface CardState {
   leech: boolean
   /** True once the card has entered the user's study rotation. */
   introduced: boolean
+  /** Epoch ms when the card was first studied (for the daily new-card throttle). */
+  introducedAt?: number
 }
 
 /** The four Anki-style answer grades. */

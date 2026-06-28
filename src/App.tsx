@@ -51,6 +51,7 @@ function BottomNav() {
   const items = [
     { to: '/', icon: '🔁', label: 'Review', end: true },
     { to: '/decks', icon: '📚', label: 'Decks' },
+    { to: '/add', icon: '➕', label: 'Add' },
     { to: '/dad', icon: '❤️', label: 'Dad' },
     { to: '/stats', icon: '📈', label: 'Stats' },
     { to: '/settings', icon: '⚙️', label: 'Settings' },
@@ -62,9 +63,10 @@ function BottomNav() {
           key={it.to}
           to={it.to}
           end={it.end}
+          aria-label={it.label}
           className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
         >
-          <span className="icon">{it.icon}</span>
+          <span className="icon" aria-hidden="true">{it.icon}</span>
           <span>{it.label}</span>
         </NavLink>
       ))}

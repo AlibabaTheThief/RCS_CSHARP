@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   newCardState,
   schedule,
+  review,
   describeInterval,
   cardsForMinutes,
   DAY,
@@ -103,6 +104,22 @@ describe('review phase', () => {
     const next = schedule(c, 'again', T)
     expect(next.lapses).toBe(LEECH_THRESHOLD)
     expect(next.leech).toBe(true)
+  })
+})
+
+describe('review (marks introduction)', () => {
+  it('marks a brand-new card as introduced with a timestamp', () => {
+    const c = { ...newCardState('x', 'd', T), introduced: false }
+    const next = review(c, 'good', T)
+    expect(next.introduced).toBe(true)
+    expect(next.introducedAt).toBe(T)
+  })
+
+  it('does not overwrite introducedAt on later reviews', () => {
+    const c = { ...newCardState('x', 'd', T), introduced: true, introducedAt: T - 100000 }
+    const next = review(c, 'good', T)
+    expect(next.introduced).toBe(true)
+    expect(next.introducedAt).toBe(T - 100000)
   })
 })
 

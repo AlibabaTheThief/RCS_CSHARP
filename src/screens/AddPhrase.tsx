@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { addDadPhrase } from '../lib/db'
 
@@ -9,8 +9,26 @@ export default function AddPhrase() {
   const [en, setEn] = useState('')
   const [note, setNote] = useState('')
   const [saved, setSaved] = useState(false)
+  const azRef = useRef<HTMLInputElement>(null)
 
-  const insertChar = (ch: string) => setAz((v) => v + ch)
+  // Insert a special character at the caret (not just the end), then restore
+  // focus and caret so the user can keep typing/correcting mid-word.
+  const insertChar = (ch: string) => {
+    const el = azRef.current
+    if (!el) {
+      setAz((v) => v + ch)
+      return
+    }
+    const start = el.selectionStart ?? az.length
+    const end = el.selectionEnd ?? az.length
+    const next = az.slice(0, start) + ch + az.slice(end)
+    setAz(next)
+    requestAnimationFrame(() => {
+      el.focus()
+      const pos = start + ch.length
+      el.setSelectionRange(pos, pos)
+    })
+  }
 
   const save = async () => {
     if (!az.trim() || !en.trim()) return
@@ -30,11 +48,14 @@ export default function AddPhrase() {
         up in Review.
       </p>
 
-      {saved && <div className="banner">✅ Saved to Phrases for Dad.</div>}
+      <div aria-live="polite">
+        {saved && <div className="banner">✅ Saved to Phrases for Dad.</div>}
+      </div>
 
       <label className="field">
         <span>Azerbaijani</span>
         <input
+          ref={azRef}
           type="text"
           value={az}
           onChange={(e) => setAz(e.target.value)}

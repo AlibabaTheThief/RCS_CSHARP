@@ -4,7 +4,7 @@ import Flashcard from '../components/Flashcard'
 import GradeButtons from '../components/GradeButtons'
 import Choices from '../components/Choices'
 import { buildQueue, type QueueItem } from '../lib/queue'
-import { schedule, MINUTE } from '../lib/srs'
+import { review as applyReview, MINUTE } from '../lib/srs'
 import { getAllCards, getSettings, logReview, putState } from '../lib/db'
 import { playCard } from '../lib/audio'
 import { answerText, supportsChoices } from '../lib/choices'
@@ -76,7 +76,7 @@ export default function Review() {
     async (g: Grade) => {
       if (!current) return
       const now = Date.now()
-      const nextState = schedule(current.state, g, now)
+      const nextState = applyReview(current.state, g, now)
       await putState(nextState)
       await logReview({ cardId: current.card.id, grade: g, at: now, intervalAfter: nextState.interval })
 
@@ -101,6 +101,30 @@ export default function Review() {
     },
     [current],
   )
+
+  // Keyboard: Space/Enter reveals, 1-4 grade (again/hard/good/easy).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement | null)?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return
+      if (!current) return
+      if (!revealed) {
+        if ((e.key === ' ' || e.key === 'Enter') && !useChoices) {
+          e.preventDefault()
+          reveal()
+        }
+      } else {
+        const map: Record<string, Grade> = { '1': 'again', '2': 'hard', '3': 'good', '4': 'easy' }
+        const g = map[e.key]
+        if (g) {
+          e.preventDefault()
+          void grade(g)
+        }
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [current, revealed, useChoices, reveal, grade])
 
   if (loading) {
     return (
@@ -167,23 +191,24 @@ export default function Review() {
       />
 
       <div style={{ marginTop: 18 }}>
-        {!revealed && useChoices && (
+        {/* Choices stay mounted after a pick so the correct/wrong colours show. */}
+        {useChoices && (
           <Choices card={current.card} pool={pool} picked={picked} onPick={pick} />
         )}
-        {!revealed && !useChoices && (
+        {!useChoices && !revealed && (
           <button className="btn" onClick={reveal}>
             Show answer
           </button>
         )}
         {revealed && (
-          <>
+          <div style={{ marginTop: useChoices ? 14 : 0 }}>
             {picked !== null && (
               <div className={`feedback ${isCorrect ? 'ok' : 'no'}`}>
                 {isCorrect ? '✓ Correct!' : '✗ Not quite — grade yourself honestly.'}
               </div>
             )}
             <GradeButtons state={current.state} onGrade={grade} />
-          </>
+          </div>
         )}
       </div>
     </div>

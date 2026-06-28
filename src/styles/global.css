@@ -101,6 +101,7 @@ button {
   top: 16px;
   left: 0;
   right: 0;
+  padding: 0 64px; /* clear the NEW badge in the corner */
   color: var(--muted);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
@@ -119,6 +120,21 @@ button {
   letter-spacing: 0.03em;
 }
 .flashcard.you-turn { border-color: var(--heart); box-shadow: 0 0 0 1px var(--heart) inset; }
+
+.card-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: faceIn 0.18s ease both;
+}
+@keyframes faceIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-face { animation: none; }
+}
 
 .front-text { font-size: 2rem; font-weight: 700; }
 .back-az { font-size: 2.4rem; font-weight: 800; color: var(--accent-2); }
@@ -240,15 +256,19 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
+  min-height: 48px;
+  flex: 1;
   color: var(--muted);
-  font-size: 0.7rem;
-  padding: 4px 10px;
+  font-size: 0.66rem;
+  padding: 4px 4px;
   border-radius: 12px;
   text-decoration: none;
 }
-.nav-item .icon { font-size: 1.35rem; }
+.nav-item .icon { font-size: 1.3rem; }
 .nav-item.active { color: var(--accent-2); }
+.nav-item.active .icon { transform: translateY(-1px); }
 
 /* ---- Lists / generic ---- */
 .list-card {

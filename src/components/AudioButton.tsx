@@ -30,6 +30,7 @@ export default function AudioButton({ card, enabled, small, autoLabel }: Props) 
       className={`audio-btn${small ? ' small' : ''}`}
       onClick={handle}
       disabled={!hasAudio}
+      aria-busy={busy}
       aria-label={autoLabel ? 'Play audio' : `Play ${card.az}`}
       title={hasAudio ? 'Play audio' : 'No audio yet'}
     >

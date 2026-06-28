@@ -1655,6 +1655,609 @@
       "tags": [
         "dialogue"
       ]
+    },
+    {
+      "id": "phasx-yemek",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "yemək",
+      "en": "food / to eat",
+      "tags": [
+        "food"
+      ],
+      "ex": "Yemək istəyirəm.",
+      "exEn": "I want food.",
+      "pron": "yeh-MEHK",
+      "note": "Same word for 'food' and 'to eat'."
+    },
+    {
+      "id": "phasx-sud",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "süd",
+      "en": "milk",
+      "tags": [
+        "food"
+      ],
+      "ex": "Süd istəyirəm.",
+      "exEn": "I want milk.",
+      "pron": "sewd"
+    },
+    {
+      "id": "phasx-duz",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "duz",
+      "en": "salt",
+      "tags": [
+        "food"
+      ],
+      "ex": "Duz var?",
+      "exEn": "Is there salt?"
+    },
+    {
+      "id": "phasx-yumurta",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "yumurta",
+      "en": "egg",
+      "tags": [
+        "food"
+      ],
+      "pron": "yoo-moor-TAH"
+    },
+    {
+      "id": "phasx-meyve",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "meyvə",
+      "en": "fruit",
+      "tags": [
+        "food"
+      ],
+      "pron": "may-VUH"
+    },
+    {
+      "id": "phasx-nus-olsun",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "Nuş olsun",
+      "en": "Enjoy your meal / Bon appétit",
+      "tags": [
+        "food",
+        "polite"
+      ],
+      "pron": "noosh ohl-SOON",
+      "note": "Said to someone who is eating or about to eat."
+    },
+    {
+      "id": "phasx-otaq",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "otaq",
+      "en": "room",
+      "tags": [
+        "home"
+      ],
+      "ex": "Otaq istidir.",
+      "exEn": "The room is warm."
+    },
+    {
+      "id": "phasx-qapi",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "qapı",
+      "en": "door",
+      "tags": [
+        "home"
+      ],
+      "pron": "gah-PUH"
+    },
+    {
+      "id": "phasx-masa",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "masa",
+      "en": "table",
+      "tags": [
+        "home"
+      ]
+    },
+    {
+      "id": "phasx-metbex",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "mətbəx",
+      "en": "kitchen",
+      "tags": [
+        "home"
+      ],
+      "pron": "muht-BUHKH"
+    },
+    {
+      "id": "phasx-bu-gun-hansi-gundur",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "Bu gün hansı gündür?",
+      "en": "What day is it today?",
+      "tags": [
+        "days",
+        "time"
+      ],
+      "pron": "boo GEWN hahn-SUH gewn-DEWR",
+      "note": "bu gün (today) + hansı (which) + gün (day)."
+    },
+    {
+      "id": "phasx-hefte",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "həftə",
+      "en": "week",
+      "tags": [
+        "days",
+        "time"
+      ],
+      "pron": "HUHF-tuh"
+    },
+    {
+      "id": "phasx-gun",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "gün",
+      "en": "day",
+      "tags": [
+        "days",
+        "time"
+      ],
+      "ex": "Yaxşı gün.",
+      "exEn": "A good day."
+    },
+    {
+      "id": "phasx-hava",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "hava",
+      "en": "weather / air",
+      "tags": [
+        "weather"
+      ],
+      "ex": "Hava yaxşıdır.",
+      "exEn": "The weather is good."
+    },
+    {
+      "id": "phasx-isti",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "isti",
+      "en": "hot / warm",
+      "tags": [
+        "weather",
+        "adjective"
+      ],
+      "ex": "Bu gün istidir.",
+      "exEn": "Today it's hot.",
+      "pron": "is-TEE"
+    },
+    {
+      "id": "phasx-soyuq",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "soyuq",
+      "en": "cold",
+      "tags": [
+        "weather",
+        "adjective"
+      ],
+      "ex": "Hava soyuqdur.",
+      "exEn": "The weather is cold.",
+      "pron": "soy-OOG"
+    },
+    {
+      "id": "phasx-yagis",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "yağış",
+      "en": "rain",
+      "tags": [
+        "weather"
+      ],
+      "ex": "Yağış yağır.",
+      "exEn": "It's raining.",
+      "pron": "yah-GUHSH"
+    },
+    {
+      "id": "phasx-boyuk",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "böyük",
+      "en": "big",
+      "tags": [
+        "adjective"
+      ],
+      "pron": "buh-YEWK"
+    },
+    {
+      "id": "phasx-kicik",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "kiçik",
+      "en": "small",
+      "tags": [
+        "adjective"
+      ],
+      "pron": "kee-CHEEK"
+    },
+    {
+      "id": "phasx-gozel",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "gözəl",
+      "en": "beautiful / nice",
+      "tags": [
+        "adjective",
+        "heart"
+      ],
+      "ex": "Gözəl gündür.",
+      "exEn": "It's a beautiful day.",
+      "pron": "guh-ZEHL"
+    },
+    {
+      "id": "phasx-bas",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "baş",
+      "en": "head",
+      "tags": [
+        "body",
+        "health"
+      ]
+    },
+    {
+      "id": "phasx-goz",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "göz",
+      "en": "eye",
+      "tags": [
+        "body",
+        "health"
+      ],
+      "pron": "guhz"
+    },
+    {
+      "id": "phasx-urek",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "ürək",
+      "en": "heart",
+      "tags": [
+        "body",
+        "health",
+        "heart"
+      ],
+      "pron": "ew-REHK"
+    },
+    {
+      "id": "phasx-basim-agriyir",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "Başım ağrıyır",
+      "en": "I have a headache",
+      "tags": [
+        "health",
+        "body"
+      ],
+      "pron": "bah-SHUHM ah-ruh-YUHR",
+      "note": "baş (head) + -ım (my) + ağrıyır (hurts)."
+    },
+    {
+      "id": "phasx-xeste",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "xəstə",
+      "en": "sick / ill",
+      "tags": [
+        "health",
+        "adjective"
+      ],
+      "ex": "Mən xəstəyəm.",
+      "exEn": "I am sick.",
+      "pron": "khuhs-TUH"
+    },
+    {
+      "id": "phasx-seher",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "səhər",
+      "en": "morning",
+      "tags": [
+        "time"
+      ],
+      "ex": "Səhər çay içirəm.",
+      "exEn": "In the morning I drink tea.",
+      "pron": "suh-HEHR"
+    },
+    {
+      "id": "phasx-axsam",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "axşam",
+      "en": "evening",
+      "tags": [
+        "time"
+      ],
+      "pron": "ahkh-SHAHM"
+    },
+    {
+      "id": "phasx-gece",
+      "deckId": "phase2",
+      "type": "vocab",
+      "az": "gecə",
+      "en": "night",
+      "tags": [
+        "time"
+      ],
+      "pron": "geh-JUH"
+    },
+    {
+      "id": "phasx-gecen-xeyre-qalsin",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "Gecən xeyrə qalsın",
+      "en": "Good night",
+      "tags": [
+        "polite",
+        "time"
+      ],
+      "pron": "geh-JUHN khay-RUH gahl-SUHN",
+      "note": "Said at bedtime. Short form: 'Gecən xeyrə'."
+    },
+    {
+      "id": "phasx-xos-gelmisen",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "Xoş gəlmisən",
+      "en": "Welcome",
+      "tags": [
+        "polite",
+        "greeting"
+      ],
+      "pron": "khohsh gehl-mee-SUHN",
+      "note": "To one person (informal). Reply: 'Xoş gördük'."
+    },
+    {
+      "id": "phasx-sagliqla-qal",
+      "deckId": "phase2",
+      "type": "phrase",
+      "az": "Sağlıqla qal",
+      "en": "Take care / Goodbye",
+      "tags": [
+        "polite",
+        "greeting"
+      ],
+      "pron": "sahg-luhg-LAH gahl",
+      "note": "Warm way to end a call. Literally 'stay in health'."
+    },
+    {
+      "id": "dadx-senin-ucun-darixmisam",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Sənin üçün darıxmışam.",
+      "en": "I've missed you.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "seh-NEEN ew-CHEWN dah-ruhkh-muh-SHAHM",
+      "note": "Warmer, fuller way to say it than just 'Darıxmışam'. sənin üçün = for you."
+    },
+    {
+      "id": "dadx-seninle-fexr-edirem",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Səninlə fəxr edirəm.",
+      "en": "I'm proud of you.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "seh-neen-LAH fakhr eh-dee-REHM",
+      "note": "fəxr etmək = to be proud. A strong thing to tell your father."
+    },
+    {
+      "id": "dadx-sen-menim-ucun-cox-ezizsen",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Sən mənim üçün çox əzizsən.",
+      "en": "You are very dear to me.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "suhn meh-NEEM ew-chewn chokh ah-zeez-SUHN",
+      "note": "əziz = dear/precious."
+    },
+    {
+      "id": "dadx-hemise-ureyimdesen",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Həmişə ürəyimdəsən.",
+      "en": "You're always in my heart.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "huh-mee-SHUH ew-reh-yeem-deh-SUHN",
+      "note": "həmişə = always; ürəyimdəsən = you are in my heart."
+    },
+    {
+      "id": "dadx-sesini-esitmek-cox-xosdur",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Səsini eşitmək çox xoşdur.",
+      "en": "It's so nice to hear your voice.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "seh-see-nee eh-sheet-MEHK chokh KHOSH-door",
+      "note": "Lovely to say at the start of a phone call. səs = voice."
+    },
+    {
+      "id": "dadx-ozune-yaxsi-bax",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Özünə yaxşı bax.",
+      "en": "Take care of yourself.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "ew-zew-NEH yah-SHUH bahkh",
+      "note": "A warm way to end a call. Literally: look after yourself well."
+    },
+    {
+      "id": "dadx-tezlikle-goruserik",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Tezliklə görüşərik.",
+      "en": "We'll see each other soon.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "tehz-leek-LUH gew-rew-shah-REEK",
+      "note": "tez = soon; görüşmək = to meet/see each other."
+    },
+    {
+      "id": "dadx-sehhetin-necedir",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Səhhətin necədir?",
+      "en": "How is your health?",
+      "tags": [
+        "heart",
+        "question"
+      ],
+      "pron": "sah-heh-TEEN neh-jeh-DEER",
+      "note": "A caring question to ask Dad. səhhət = health."
+    },
+    {
+      "id": "dadx-bu-gun-ne-etdin",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Bu gün nə etdin?",
+      "en": "What did you do today?",
+      "tags": [
+        "question"
+      ],
+      "pron": "boo gewn nuh eht-DEEN",
+      "note": "etdin = you did (past). A natural everyday question."
+    },
+    {
+      "id": "dadx-orada-hava-necedir",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Orada hava necədir?",
+      "en": "How's the weather there?",
+      "tags": [
+        "question"
+      ],
+      "pron": "oh-rah-DAH hah-VAH neh-jeh-DEER",
+      "note": "Easy small-talk question. hava = weather; orada = there."
+    },
+    {
+      "id": "dadx-bagisla-basa-dusmedim",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Bağışla, başa düşmədim.",
+      "en": "Sorry, I didn't understand.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "bah-ghuhsh-LAH, bah-SHAH dewsh-meh-DEEM",
+      "note": "Very useful when you miss something Dad said."
+    },
+    {
+      "id": "dadx-bir-de-de-zehmet-olmasa",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Bir də de, zəhmət olmasa.",
+      "en": "Say it again, please.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "beer duh deh, zah-MEHT ol-mah-SAH",
+      "note": "bir də = once more; de = say (command)."
+    },
+    {
+      "id": "dadx-yavas-danis-xahis-edirem",
+      "deckId": "dad",
+      "type": "phrase",
+      "az": "Yavaş danış, xahiş edirəm.",
+      "en": "Speak slowly, please.",
+      "tags": [
+        "heart"
+      ],
+      "pron": "yah-VAHSH dah-NUHSH, khah-HEESH eh-dee-REHM",
+      "note": "yavaş = slowly. Helps Dad slow down for you."
+    },
+    {
+      "id": "pattx-sehhetin-necedir",
+      "deckId": "patterns",
+      "type": "cloze",
+      "az": "Səhhətin necədir?",
+      "en": "How is your ___ (health)?",
+      "tags": [
+        "pattern",
+        "question"
+      ],
+      "note": "Swap the noun: İşin necədir? (How's work?) · Anan necədir? (How's your mum?)",
+      "cloze": "___ necədir?"
+    },
+    {
+      "id": "pattx-bu-gun-ne-etdin",
+      "deckId": "patterns",
+      "type": "cloze",
+      "az": "Bu gün nə etdin?",
+      "en": "What did you ___ (do) today?",
+      "tags": [
+        "pattern",
+        "question"
+      ],
+      "note": "Past tense -din ending = you did. Try: Harada oldun? (Where were you?)",
+      "cloze": "Bu gün ___ etdin?"
+    },
+    {
+      "id": "pattx-seninle-danismaq-isteyirem",
+      "deckId": "patterns",
+      "type": "cloze",
+      "az": "Səninlə danışmaq istəyirəm.",
+      "en": "I want to ___ (talk) with you.",
+      "tags": [
+        "pattern"
+      ],
+      "note": "Swap the verb: Səninlə görüşmək istəyirəm (I want to meet with you).",
+      "cloze": "Səninlə ___ istəyirəm."
+    },
+    {
+      "id": "pattx-senin-ucun-darixmisam",
+      "deckId": "patterns",
+      "type": "cloze",
+      "az": "Sənin üçün darıxmışam.",
+      "en": "I've missed ___ (you).",
+      "tags": [
+        "pattern",
+        "heart"
+      ],
+      "note": "Swap: Evimiz üçün darıxmışam (I miss our home).",
+      "cloze": "___ üçün darıxmışam."
+    },
+    {
+      "id": "pattx-men-de-seni-sevirem",
+      "deckId": "patterns",
+      "type": "cloze",
+      "az": "Mən də səni sevirəm.",
+      "en": "___ too (I love you too).",
+      "tags": [
+        "pattern",
+        "heart"
+      ],
+      "note": "də = too/also. Reply to Dad: Mən də yaxşıyam (I'm good too).",
+      "cloze": "Mən də ___."
     }
   ]
 }

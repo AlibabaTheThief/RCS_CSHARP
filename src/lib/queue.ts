@@ -31,12 +31,10 @@ const startOfDay = (now: number): number => {
   return d.getTime()
 }
 
-/** How many new cards were already introduced today (to honor newPerDay). */
+/** How many new cards were first studied today (to honor newPerDay). */
 function introducedToday(states: CardState[], now: number): number {
   const dayStart = startOfDay(now)
-  return states.filter(
-    (s) => s.introduced && s.reps === 0 && s.lastReviewed === null && s.due >= dayStart,
-  ).length
+  return states.filter((s) => s.introducedAt !== undefined && s.introducedAt >= dayStart).length
 }
 
 export async function buildQueue(now = Date.now()): Promise<DailyQueue> {
