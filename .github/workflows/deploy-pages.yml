@@ -5,7 +5,7 @@ name: Deploy Azeri for Dad to GitHub Pages
 # branch and can be triggered manually.
 on:
   push:
-    branches: [claude/azeri-learning-app-whv2tn]
+    branches: [master, claude/azeri-learning-app-whv2tn]
   workflow_dispatch:
 
 permissions:
