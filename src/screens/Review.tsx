@@ -30,6 +30,8 @@ export default function Review() {
   const [overflow, setOverflow] = useState(0)
   // How many times each card has been re-shown this session (leech guard).
   const reinserts = useRef<Map<string, number>>(new Map())
+  // Pending auto-advance timer for multiple-choice (cleared on manual adjust).
+  const autoAdvance = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -62,19 +64,10 @@ export default function Review() {
     }
   }, [current, audioEnabled])
 
-  const pick = useCallback(
-    (option: string) => {
-      if (!current) return
-      setPicked(option)
-      setRevealed(true)
-      void playCard(current.card, audioEnabled)
-    },
-    [current, audioEnabled],
-  )
-
   const grade = useCallback(
     async (g: Grade) => {
       if (!current) return
+      if (autoAdvance.current) clearTimeout(autoAdvance.current)
       const now = Date.now()
       const nextState = applyReview(current.state, g, now)
       await putState(nextState)
@@ -101,6 +94,32 @@ export default function Review() {
     },
     [current],
   )
+
+  // Multiple choice: picking an answer auto-grades (correct→good, wrong→again)
+  // and advances on its own after a short pause. The adjust buttons cancel it.
+  const pick = useCallback(
+    (option: string) => {
+      if (!current) return
+      setPicked(option)
+      setRevealed(true)
+      void playCard(current.card, audioEnabled)
+      const correct = option === answerText(current.card)
+      if (autoAdvance.current) clearTimeout(autoAdvance.current)
+      autoAdvance.current = setTimeout(() => void grade(correct ? 'good' : 'again'), correct ? 1000 : 2200)
+    },
+    [current, audioEnabled, grade],
+  )
+
+  const adjustGrade = useCallback(
+    (g: Grade) => {
+      if (autoAdvance.current) clearTimeout(autoAdvance.current)
+      void grade(g)
+    },
+    [grade],
+  )
+
+  // Clear any pending auto-advance when leaving the screen.
+  useEffect(() => () => { if (autoAdvance.current) clearTimeout(autoAdvance.current) }, [])
 
   // Keyboard: Space/Enter reveals, 1-4 grade (again/hard/good/easy).
   useEffect(() => {
@@ -191,24 +210,35 @@ export default function Review() {
       />
 
       <div style={{ marginTop: 18 }}>
-        {/* Choices stay mounted after a pick so the correct/wrong colours show. */}
-        {useChoices && (
-          <Choices card={current.card} pool={pool} picked={picked} onPick={pick} />
-        )}
-        {!useChoices && !revealed && (
+        {useChoices ? (
+          <>
+            {/* Choices stay mounted after a pick so the correct/wrong colours show. */}
+            <Choices card={current.card} pool={pool} picked={picked} onPick={pick} />
+            {revealed && picked !== null && (
+              <div style={{ marginTop: 14 }}>
+                <div className={`feedback ${isCorrect ? 'ok' : 'no'}`}>
+                  {isCorrect ? '✓ Correct!' : `✗ Answer: ${answerText(current.card)}`}
+                </div>
+                <div className="adjust-row">
+                  <span className="muted small">Adjust:</span>
+                  {isCorrect ? (
+                    <>
+                      <button className="tag" onClick={() => adjustGrade('hard')}>Hard</button>
+                      <button className="tag" onClick={() => adjustGrade('easy')}>Easy</button>
+                    </>
+                  ) : (
+                    <button className="tag" onClick={() => adjustGrade('good')}>I knew it</button>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        ) : !revealed ? (
           <button className="btn" onClick={reveal}>
             Show answer
           </button>
-        )}
-        {revealed && (
-          <div style={{ marginTop: useChoices ? 14 : 0 }}>
-            {picked !== null && (
-              <div className={`feedback ${isCorrect ? 'ok' : 'no'}`}>
-                {isCorrect ? '✓ Correct!' : '✗ Not quite — grade yourself honestly.'}
-              </div>
-            )}
-            <GradeButtons state={current.state} onGrade={grade} />
-          </div>
+        ) : (
+          <GradeButtons state={current.state} onGrade={grade} />
         )}
       </div>
     </div>
