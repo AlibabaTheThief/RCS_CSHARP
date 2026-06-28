@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Vite / PWA generated
+dev-dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Generated audio is large and rebuildable from cards.seed.json via scripts/.
+# Uncomment the next line if you prefer NOT to commit the mp3s.
+# public/audio/*.mp3
+
+# TS incremental build info
+*.tsbuildinfo
