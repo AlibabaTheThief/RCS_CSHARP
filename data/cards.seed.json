@@ -48,6 +48,13 @@
       "phase": 1,
       "description": "Short scripted conversations you can run end-to-end, then say for real.",
       "enabledByDefault": false
+    },
+    {
+      "id": "phrasebook",
+      "name": "Everyday Phrases",
+      "phase": 1,
+      "description": "High-frequency phrases for real conversations — learn by whole phrases.",
+      "enabledByDefault": true
     }
   ],
   "cards": [
@@ -2258,6 +2265,384 @@
       ],
       "note": "də = too/also. Reply to Dad: Mən də yaxşıyam (I'm good too).",
       "cloze": "Mən də ___."
+    },
+    {
+      "id": "pb-adin-nedir",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Adın nədir?",
+      "en": "What's your name?",
+      "pron": "ah-DUHN neh-DEER",
+      "tags": [
+        "introduction"
+      ]
+    },
+    {
+      "id": "pb-menim-adim-ali",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Mənim adım Ali.",
+      "en": "My name is Ali.",
+      "pron": "meh-NEEM ah-DUHM ah-LEE",
+      "tags": [
+        "introduction"
+      ]
+    },
+    {
+      "id": "pb-cox-sadam",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Çox şadam.",
+      "en": "I'm very glad.",
+      "pron": "chokh shah-DAHM",
+      "tags": [
+        "feeling"
+      ]
+    },
+    {
+      "id": "pb-necesiniz",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Necəsiniz?",
+      "en": "How are you? (polite)",
+      "pron": "neh-juh-see-NEEZ",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "pb-cox-sag-olun",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Çox sağ olun.",
+      "en": "Thank you very much (polite)",
+      "pron": "chokh sah oh-LOON",
+      "tags": [
+        "politeness"
+      ]
+    },
+    {
+      "id": "pb-deymez",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Dəyməz.",
+      "en": "You're welcome.",
+      "pron": "dey-MEZ",
+      "tags": [
+        "politeness"
+      ]
+    },
+    {
+      "id": "pb-bagislayin",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Bağışlayın.",
+      "en": "Excuse me / Sorry (polite)",
+      "pron": "bah-ghuhsh-lah-YUHN",
+      "tags": [
+        "politeness"
+      ]
+    },
+    {
+      "id": "pb-basa-dusmurem",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Başa düşmürəm.",
+      "en": "I don't understand.",
+      "pron": "bah-SHAH dyush-myu-REM",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "id": "pb-yavas-danis-zehmet-olmasa",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Yavaş danış, zəhmət olmasa.",
+      "en": "Speak slowly, please.",
+      "pron": "yah-VAHSH dah-NUHSH, zeh-MET ol-mah-SAH",
+      "tags": [
+        "request"
+      ]
+    },
+    {
+      "id": "pb-bunu-nece-deyirler",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Bunu necə deyirlər?",
+      "en": "How do you say this?",
+      "pron": "boo-NOO neh-JUH de-yeer-LER",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "id": "pb-bu-nedir",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Bu nədir?",
+      "en": "What is this?",
+      "pron": "boo neh-DEER",
+      "tags": [
+        "question"
+      ]
+    },
+    {
+      "id": "pb-harada-yasayirsan",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Harada yaşayırsan?",
+      "en": "Where do you live?",
+      "pron": "hah-rah-DAH yah-shah-yuhr-SAHN",
+      "tags": [
+        "small-talk"
+      ]
+    },
+    {
+      "id": "pb-men-burada-yasayiram",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Mən burada yaşayıram.",
+      "en": "I live here.",
+      "pron": "men boo-rah-DAH yah-shah-yuh-RAHM",
+      "tags": [
+        "small-talk"
+      ]
+    },
+    {
+      "id": "pb-acmisam",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Acmışam.",
+      "en": "I'm hungry.",
+      "pron": "aj-muh-SHAHM",
+      "tags": [
+        "feeling"
+      ]
+    },
+    {
+      "id": "pb-susamisam",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Susamışam.",
+      "en": "I'm thirsty.",
+      "pron": "soo-sah-muh-SHAHM",
+      "tags": [
+        "feeling"
+      ]
+    },
+    {
+      "id": "pb-yorgunam",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Yorğunam.",
+      "en": "I'm tired.",
+      "pron": "yor-ghoo-NAHM",
+      "tags": [
+        "feeling"
+      ]
+    },
+    {
+      "id": "pb-cox-gozel",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Çox gözəl!",
+      "en": "Very nice!",
+      "pron": "chokh gyu-ZEL",
+      "tags": [
+        "reaction"
+      ]
+    },
+    {
+      "id": "pb-duz-deyirsen",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Düz deyirsən.",
+      "en": "You're right.",
+      "pron": "dyuz de-yeer-SEN",
+      "tags": [
+        "reaction"
+      ]
+    },
+    {
+      "id": "pb-bilmirem",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Bilmirəm.",
+      "en": "I don't know.",
+      "pron": "beel-mee-REM",
+      "tags": [
+        "communication"
+      ]
+    },
+    {
+      "id": "pb-bir-deqiqe",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Bir dəqiqə.",
+      "en": "Just a moment.",
+      "pron": "beer deh-gee-GUH",
+      "tags": [
+        "request"
+      ]
+    },
+    {
+      "id": "pb-gozle",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Gözlə.",
+      "en": "Wait.",
+      "pron": "gyuz-LUH",
+      "tags": [
+        "request"
+      ]
+    },
+    {
+      "id": "pb-gedek",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Gedək.",
+      "en": "Let's go.",
+      "pron": "geh-DEK",
+      "tags": [
+        "request"
+      ]
+    },
+    {
+      "id": "pb-goruserik",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Görüşərik.",
+      "en": "See you.",
+      "pron": "gyu-ryu-sheh-REEK",
+      "tags": [
+        "goodbye"
+      ]
+    },
+    {
+      "id": "pb-sabah-goruserik",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Sabah görüşərik.",
+      "en": "See you tomorrow.",
+      "pron": "sah-BAH gyu-ryu-sheh-REEK",
+      "tags": [
+        "goodbye"
+      ]
+    },
+    {
+      "id": "pb-ne-var-ne-yox",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Nə var, nə yox?",
+      "en": "What's up?",
+      "pron": "neh VAHR, neh YOKH",
+      "tags": [
+        "greeting",
+        "small-talk"
+      ]
+    },
+    {
+      "id": "pb-yaxsi-sen-necesen",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Yaxşı, sən necəsən?",
+      "en": "Good, and you?",
+      "pron": "yakh-SHUH, sen neh-JUH-sun",
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "pb-nece-kecdi",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Necə keçdi?",
+      "en": "How did it go?",
+      "pron": "neh-JUH kech-DEE",
+      "tags": [
+        "small-talk"
+      ]
+    },
+    {
+      "id": "pb-mene-zeng-et",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Mənə zəng et.",
+      "en": "Call me.",
+      "pron": "meh-NUH zeng ET",
+      "tags": [
+        "request",
+        "family"
+      ]
+    },
+    {
+      "id": "pb-ozunden-mugayat-ol",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Özündən muğayat ol.",
+      "en": "Take care of yourself.",
+      "pron": "yu-zyun-DEN moo-ghah-YAHT OL",
+      "tags": [
+        "goodbye",
+        "family"
+      ]
+    },
+    {
+      "id": "pb-sagliqla-qal",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Sağlıqla qal.",
+      "en": "Goodbye (to one staying).",
+      "pron": "sah-luhgh-LAH GAHL",
+      "tags": [
+        "goodbye"
+      ]
+    },
+    {
+      "id": "pb-yaxsi-yol",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Yaxşı yol.",
+      "en": "Have a good trip / Bye.",
+      "pron": "yakh-SHUH YOL",
+      "tags": [
+        "goodbye"
+      ]
+    },
+    {
+      "id": "pb-gecen-xeyre-qalsin",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Gecən xeyrə qalsın.",
+      "en": "Good night.",
+      "pron": "geh-JEN khey-RUH gahl-SUHN",
+      "tags": [
+        "goodbye"
+      ]
+    },
+    {
+      "id": "pb-seni-gormek-isteyirem",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Səni görmək istəyirəm.",
+      "en": "I want to see you.",
+      "pron": "seh-NEE gyur-MEK ees-teh-yee-REM",
+      "tags": [
+        "feeling",
+        "family"
+      ]
+    },
+    {
+      "id": "pb-her-sey-qaydasindadir",
+      "deckId": "phrasebook",
+      "type": "phrase",
+      "az": "Hər şey qaydasındadır.",
+      "en": "Everything's fine.",
+      "pron": "her shey gay-dah-suhn-dah-DUHR",
+      "tags": [
+        "small-talk"
+      ]
     }
   ]
 }

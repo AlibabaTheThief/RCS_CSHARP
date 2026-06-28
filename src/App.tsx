@@ -4,6 +4,7 @@ import seed from '../data/cards.seed.json'
 import type { SeedFile } from './lib/types'
 import { ensureSeeded, requestPersistentStorage } from './lib/db'
 import Review from './screens/Review'
+import Learn from './screens/Learn'
 import Decks from './screens/Decks'
 import AddPhrase from './screens/AddPhrase'
 import Stats from './screens/Stats'
@@ -36,6 +37,7 @@ export default function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<Review />} />
+        <Route path="/learn" element={<Learn />} />
         <Route path="/decks" element={<Decks />} />
         <Route path="/add" element={<AddPhrase />} />
         <Route path="/dad" element={<TalkToDad />} />
@@ -50,8 +52,8 @@ export default function App() {
 function BottomNav() {
   const items = [
     { to: '/', icon: '🔁', label: 'Review', end: true },
+    { to: '/learn', icon: '📖', label: 'Learn' },
     { to: '/decks', icon: '📚', label: 'Decks' },
-    { to: '/add', icon: '➕', label: 'Add' },
     { to: '/dad', icon: '❤️', label: 'Dad' },
     { to: '/stats', icon: '📈', label: 'Stats' },
     { to: '/settings', icon: '⚙️', label: 'Settings' },

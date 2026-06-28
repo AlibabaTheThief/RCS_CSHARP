@@ -97,6 +97,24 @@ export interface ReviewLog {
   intervalAfter: number
 }
 
+/** A theory lesson: walk through phrases, then read explanation sections. */
+export interface LessonSection {
+  heading: string
+  body: string
+}
+
+export interface Lesson {
+  id: string
+  emoji: string
+  title: string
+  intro: string
+  /** Explicit phrase card ids to walk through. */
+  cardIds?: string[]
+  /** Or pull all phrases from a deck. */
+  deckId?: string
+  theory: LessonSection[]
+}
+
 export interface Settings {
   audioEnabled: boolean
   /** Target minutes per day; drives how many new cards/reviews are surfaced. */

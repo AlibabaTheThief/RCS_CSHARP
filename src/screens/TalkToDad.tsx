@@ -175,6 +175,10 @@ export default function TalkToDad() {
         Flag the phrases you most want to say, drill them, and rehearse whole conversations.
       </p>
 
+      <Link to="/add" className="btn secondary" style={{ marginBottom: 18 }}>
+        ➕ Add a phrase
+      </Link>
+
       {goalCards.length > 0 && (
         <button className="btn" style={{ marginBottom: 18 }} onClick={() => { setDrillIdx(0); setRevealed(false); setMode('drill') }}>
           🎯 Drill my {goalCards.length} goal{goalCards.length === 1 ? '' : 's'}

@@ -209,6 +209,26 @@ button {
 .grade-good { background: var(--good); }
 .grade-easy { background: var(--easy); }
 
+/* ---- Lessons / Learn ---- */
+.lesson-card { display: block; width: 100%; text-align: left; cursor: pointer; }
+.lesson-pane {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 28px 22px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+.lesson-pane.theory { text-align: left; justify-content: flex-start; }
+.lesson-pane.theory h2 { color: var(--accent-2); font-size: 1.25rem; }
+.lesson-pane.theory p { margin: 6px 0; line-height: 1.5; }
+.lesson-pane.theory p.bullet { padding-left: 6px; color: var(--text); }
+.lesson-pane .big-emoji { font-size: 3rem; }
+
 /* ---- Multiple choice ---- */
 .choices { display: grid; gap: 10px; }
 .choice {
