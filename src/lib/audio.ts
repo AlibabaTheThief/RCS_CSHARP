@@ -13,6 +13,27 @@ const BASE = import.meta.env.BASE_URL || './'
 const toUrl = (name: string): string =>
   `${BASE}audio/${name}.mp3`.replace(/\/\//g, '/').replace(':/', '://')
 
+// Azerbaijani → ascii slug, kept byte-for-byte in sync with scripts/_slug.py so
+// lesson-audio filenames match between the generator and the app.
+const AZ_MAP: Record<string, string> = {
+  ə: 'e', Ə: 'e', ı: 'i', ö: 'o', Ö: 'o', ü: 'u', Ü: 'u',
+  ç: 'c', Ç: 'c', ş: 's', Ş: 's', ğ: 'g', Ğ: 'g', İ: 'i',
+}
+export function azSlug(s: string): string {
+  return s
+    .replace(/[əƏıöÖüÜçÇşŞğĞİ]/g, (c) => AZ_MAP[c] ?? c)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 28) || 'x'
+}
+
+/** Play a standalone lesson audio clip (spoken theory example). */
+export async function playLessonAudio(az: string, enabled: boolean): Promise<boolean> {
+  if (!enabled || !az) return false
+  return playUrl(toUrl(`lsn-${azSlug(az)}`))
+}
+
 /** Resolve the audio URL for a card, or null if it has no expected audio. */
 export function audioUrlFor(card: SeedCard): string | null {
   if (card.hasAudio === false) return null

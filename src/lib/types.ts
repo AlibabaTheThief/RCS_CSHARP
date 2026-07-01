@@ -101,6 +101,8 @@ export interface ReviewLog {
 export interface LessonSection {
   heading: string
   body: string
+  /** Optional spoken examples shown as tap-to-hear chips under the text. */
+  audio?: { az: string; say?: string }[]
 }
 
 export interface Lesson {

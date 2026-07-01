@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import lessonsData from '../../data/lessons.json'
 import type { Lesson, SeedCard } from '../lib/types'
 import { getCard, getCardsByDeck, getSettings } from '../lib/db'
-import { playCard } from '../lib/audio'
+import { playCard, playLessonAudio } from '../lib/audio'
 import AudioButton from '../components/AudioButton'
 
 const LESSONS = lessonsData as Lesson[]
@@ -113,6 +113,21 @@ function LessonPlayer({ lesson, onExit }: { lesson: Lesson; onExit: () => void }
           {lesson.theory[step.index].body.split('\n').map((line, k) => (
             <p key={k} className={line.startsWith('•') ? 'bullet' : ''}>{line}</p>
           ))}
+          {lesson.theory[step.index].audio && (
+            <div className="say-row">
+              <span className="muted small">Hear it:</span>
+              {lesson.theory[step.index].audio!.map((a) => (
+                <button
+                  key={a.az}
+                  className="say-chip az"
+                  onClick={() => void playLessonAudio(a.az, audioEnabled)}
+                  aria-label={`Play ${a.az}`}
+                >
+                  🔊 {a.say ?? a.az}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

@@ -228,6 +228,16 @@ button {
 .lesson-pane.theory p { margin: 6px 0; line-height: 1.5; }
 .lesson-pane.theory p.bullet { padding-left: 6px; color: var(--text); }
 .lesson-pane .big-emoji { font-size: 3rem; }
+.say-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.say-chip {
+  background: var(--accent);
+  color: #04201f;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.say-chip:active { transform: scale(0.97); }
 
 /* ---- Multiple choice ---- */
 .choices { display: grid; gap: 10px; }

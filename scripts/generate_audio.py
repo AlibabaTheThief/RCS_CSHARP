@@ -20,11 +20,32 @@ import os
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _slug import az_slug  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEED = os.path.join(ROOT, "data", "cards.seed.json")
+LESSONS = os.path.join(ROOT, "data", "lessons.json")
 OUT_DIR = os.path.join(ROOT, "public", "audio")
 
 FORCE = "--force" in sys.argv
+
+
+def lesson_jobs(seen):
+    jobs = []
+    try:
+        with open(LESSONS, encoding="utf-8") as f:
+            lessons = json.load(f)
+    except FileNotFoundError:
+        return jobs
+    for lsn in lessons:
+        for sec in lsn.get("theory", []):
+            for a in sec.get("audio", []):
+                name = "lsn-" + az_slug(a["az"])
+                if name not in seen:
+                    seen.add(name)
+                    jobs.append((name, a["az"]))
+    return jobs
 
 
 def main() -> int:
@@ -47,6 +68,7 @@ def main() -> int:
             jobs.append((c["id"], c["az"]))
         if c.get("ex"):
             jobs.append((f"{c['id']}.ex", c["ex"]))
+    jobs += lesson_jobs({name for name, _ in jobs})
     print(f"gTTS · {len(jobs)} clips · out: {OUT_DIR}")
 
     made = skipped = failed = 0
