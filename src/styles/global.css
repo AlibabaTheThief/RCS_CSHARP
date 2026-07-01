@@ -149,6 +149,7 @@ button {
   border-top: 1px solid var(--line);
   padding-top: 12px;
 }
+.cyrillic { color: var(--muted); font-size: 1.05rem; opacity: 0.85; margin-top: -6px; }
 .pron { color: var(--muted); font-size: 1rem; letter-spacing: 0.02em; margin-top: -6px; }
 .example {
   margin-top: 8px;

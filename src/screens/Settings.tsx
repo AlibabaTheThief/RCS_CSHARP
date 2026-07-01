@@ -125,6 +125,24 @@ export default function SettingsScreen() {
       </div>
 
       <div className="list-card">
+        <div className="row">
+          <div>
+            <strong>Show Cyrillic (Кирил)</strong>
+            <div className="muted small">Also show phrases in Dad's script — the one he learned</div>
+          </div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={settings.showCyrillic}
+              onChange={(e) => update({ showCyrillic: e.target.checked })}
+            />
+            <span className="track" />
+            <span className="thumb" />
+          </label>
+        </div>
+      </div>
+
+      <div className="list-card">
         <strong>Daily target</strong>
         <div className="muted small" style={{ marginBottom: 10 }}>
           ~{cardsForMinutes(settings.dailyTargetMinutes)} cards/day

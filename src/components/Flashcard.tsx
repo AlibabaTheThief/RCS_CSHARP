@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import type { SeedCard } from '../lib/types'
 import { exampleAudioUrlFor, playCard, playExample } from '../lib/audio'
+import { toAzCyrillic } from '../lib/cyrillic'
 import AudioButton from './AudioButton'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
   revealed: boolean
   isNew?: boolean
   audioEnabled: boolean
+  showCyrillic?: boolean
 }
 
 /**
@@ -18,7 +20,7 @@ interface Props {
  *   cloze     → fill-in-the-blank prompt, then the full Azeri + audio
  *   vocab / phrase / dad → English prompt, then Azeri + audio (production)
  */
-export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props) {
+export default function Flashcard({ card, revealed, isNew, audioEnabled, showCyrillic }: Props) {
   const isSound = card.type === 'sound'
   const isListening = card.type === 'listening'
   const isCloze = card.type === 'cloze'
@@ -45,7 +47,7 @@ export default function Flashcard({ card, revealed, isNew, audioEnabled }: Props
         <FrontSide card={card} isSound={isSound} isListening={isListening} isCloze={isCloze} audioEnabled={audioEnabled} />
       ) : (
         <div className="card-face">
-          <BackSide card={card} audioEnabled={audioEnabled} />
+          <BackSide card={card} audioEnabled={audioEnabled} showCyrillic={showCyrillic} />
         </div>
       )}
     </div>
@@ -92,11 +94,20 @@ function FrontSide({
   return <div className="front-text">{card.en}</div>
 }
 
-function BackSide({ card, audioEnabled }: { card: SeedCard; audioEnabled: boolean }) {
+function BackSide({
+  card,
+  audioEnabled,
+  showCyrillic,
+}: {
+  card: SeedCard
+  audioEnabled: boolean
+  showCyrillic?: boolean
+}) {
   const hasExample = !!card.ex && exampleAudioUrlFor(card) !== null
   return (
     <>
       <div className="back-az az">{card.az}</div>
+      {showCyrillic && <div className="cyrillic az">{toAzCyrillic(card.az)}</div>}
       {card.pron && <div className="pron">{card.pron}</div>}
       <div className="back-en">{card.en}</div>
 

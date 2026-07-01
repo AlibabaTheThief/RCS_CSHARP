@@ -69,6 +69,7 @@ export const DEFAULT_SETTINGS: Settings = {
   dailyTargetMinutes: 15,
   newPerDay: 8,
   choiceMode: true,
+  showCyrillic: false,
   seeded: false,
 }
 

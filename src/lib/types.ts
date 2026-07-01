@@ -137,6 +137,8 @@ export interface Settings {
   newPerDay: number
   /** Show tappable multiple-choice options during review. */
   choiceMode: boolean
+  /** Also show Azerbaijani in Cyrillic (the script Dad grew up with). */
+  showCyrillic: boolean
   /** Whether the first-launch seed has been loaded. */
   seeded: boolean
 }

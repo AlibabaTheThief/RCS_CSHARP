@@ -24,6 +24,7 @@ export default function Review() {
   const [loading, setLoading] = useState(true)
   const [audioEnabled, setAudioEnabled] = useState(true)
   const [choiceMode, setChoiceMode] = useState(true)
+  const [showCyrillic, setShowCyrillic] = useState(false)
   const [pool, setPool] = useState<SeedCard[]>([])
   const [total, setTotal] = useState(0)
   const [completed, setCompleted] = useState(0)
@@ -38,6 +39,7 @@ export default function Review() {
     const [q, settings, allCards] = await Promise.all([buildQueue(), getSettings(), getAllCards()])
     setAudioEnabled(settings.audioEnabled)
     setChoiceMode(settings.choiceMode)
+    setShowCyrillic(settings.showCyrillic)
     setPool(allCards)
     setQueue(q.items)
     setTotal(q.items.length)
@@ -207,6 +209,7 @@ export default function Review() {
         revealed={revealed}
         isNew={current.isNew}
         audioEnabled={audioEnabled}
+        showCyrillic={showCyrillic}
       />
 
       <div style={{ marginTop: 18 }}>
