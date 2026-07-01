@@ -239,6 +239,26 @@ button {
 }
 .say-chip:active { transform: scale(0.97); }
 
+/* ---- Culture articles ---- */
+.article-section { margin-bottom: 20px; }
+.article-section h2 { color: var(--accent-2); font-size: 1.2rem; margin: 0 0 8px; }
+.article-section p { margin: 6px 0; line-height: 1.55; }
+.article-section p.bullet { padding-left: 6px; }
+.terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.term-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.term-chip .az { font-weight: 700; color: var(--accent-2); }
+.term-chip:active { transform: scale(0.98); }
+
 /* ---- Multiple choice ---- */
 .choices { display: grid; gap: 10px; }
 .choice {
@@ -292,13 +312,20 @@ button {
   gap: 2px;
   min-height: 48px;
   flex: 1;
+  min-width: 0;
   color: var(--muted);
-  font-size: 0.66rem;
-  padding: 4px 4px;
+  font-size: 0.6rem;
+  padding: 4px 2px;
   border-radius: 12px;
   text-decoration: none;
 }
-.nav-item .icon { font-size: 1.3rem; }
+.nav-item > span:last-child {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-item .icon { font-size: 1.25rem; }
 .nav-item.active { color: var(--accent-2); }
 .nav-item.active .icon { transform: translateY(-1px); }
 

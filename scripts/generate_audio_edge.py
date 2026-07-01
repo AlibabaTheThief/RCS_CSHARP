@@ -27,24 +27,34 @@ from _slug import az_slug  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEED = os.path.join(ROOT, "data", "cards.seed.json")
 LESSONS = os.path.join(ROOT, "data", "lessons.json")
+CULTURE = os.path.join(ROOT, "data", "culture.json")
 OUT_DIR = os.path.join(ROOT, "public", "audio")
 
 
-def lesson_jobs(seen):
-    """(name, text) pairs for spoken theory examples in lessons.json."""
+def extra_jobs(seen):
+    """(name, text) pairs for spoken lesson examples and culture terms.
+    Both are named lsn-<slug>.mp3 so the app plays them via playLessonAudio."""
     jobs = []
+
+    def add(text):
+        name = "lsn-" + az_slug(text)
+        if name not in seen:
+            seen.add(name)
+            jobs.append((name, text))
+
     try:
-        with open(LESSONS, encoding="utf-8") as f:
-            lessons = json.load(f)
+        for lsn in json.load(open(LESSONS, encoding="utf-8")):
+            for sec in lsn.get("theory", []):
+                for a in sec.get("audio", []):
+                    add(a["az"])
     except FileNotFoundError:
-        return jobs
-    for lsn in lessons:
-        for sec in lsn.get("theory", []):
-            for a in sec.get("audio", []):
-                name = "lsn-" + az_slug(a["az"])
-                if name not in seen:
-                    seen.add(name)
-                    jobs.append((name, a["az"]))
+        pass
+    try:
+        for art in json.load(open(CULTURE, encoding="utf-8")):
+            for t in art.get("terms", []):
+                add(t["az"])
+    except FileNotFoundError:
+        pass
     return jobs
 
 FORCE = "--force" in sys.argv
@@ -86,7 +96,7 @@ async def main() -> int:
             jobs.append((c["id"], c["az"]))
         if c.get("ex"):
             jobs.append((f"{c['id']}.ex", c["ex"]))
-    jobs += lesson_jobs({name for name, _ in jobs})
+    jobs += extra_jobs({name for name, _ in jobs})
     print(f"edge-tts ({VOICE}) · {len(jobs)} clips · out: {OUT_DIR}")
 
     made = skipped = failed = 0

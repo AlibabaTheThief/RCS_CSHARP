@@ -5,6 +5,7 @@ import type { SeedFile } from './lib/types'
 import { ensureSeeded, requestPersistentStorage } from './lib/db'
 import Review from './screens/Review'
 import Learn from './screens/Learn'
+import Culture from './screens/Culture'
 import Decks from './screens/Decks'
 import AddPhrase from './screens/AddPhrase'
 import Stats from './screens/Stats'
@@ -38,6 +39,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Review />} />
         <Route path="/learn" element={<Learn />} />
+        <Route path="/culture" element={<Culture />} />
         <Route path="/decks" element={<Decks />} />
         <Route path="/add" element={<AddPhrase />} />
         <Route path="/dad" element={<TalkToDad />} />
@@ -53,6 +55,7 @@ function BottomNav() {
   const items = [
     { to: '/', icon: '🔁', label: 'Review', end: true },
     { to: '/learn', icon: '📖', label: 'Learn' },
+    { to: '/culture', icon: '📜', label: 'Culture' },
     { to: '/decks', icon: '📚', label: 'Decks' },
     { to: '/dad', icon: '❤️', label: 'Dad' },
     { to: '/stats', icon: '📈', label: 'Stats' },

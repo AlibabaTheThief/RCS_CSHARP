@@ -117,6 +117,18 @@ export interface Lesson {
   theory: LessonSection[]
 }
 
+/** A read-only culture/history article for the Culture tab. */
+export interface Article {
+  id: string
+  emoji: string
+  title: string
+  subtitle: string
+  sections: LessonSection[]
+  /** Key Azerbaijani terms, shown as tap-to-hear chips. */
+  terms?: { az: string; en: string }[]
+  sources?: string[]
+}
+
 export interface Settings {
   audioEnabled: boolean
   /** Target minutes per day; drives how many new cards/reviews are surfaced. */
