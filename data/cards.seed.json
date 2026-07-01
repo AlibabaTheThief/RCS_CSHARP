@@ -55,6 +55,13 @@
       "phase": 1,
       "description": "High-frequency phrases for real conversations — learn by whole phrases.",
       "enabledByDefault": true
+    },
+    {
+      "id": "roots",
+      "name": "Dad's Roots",
+      "phase": 1,
+      "description": "Ask Dad about his childhood in Sumgait and the world he grew up in.",
+      "enabledByDefault": true
     }
   ],
   "cards": [
@@ -2642,6 +2649,236 @@
       "pron": "her shey gay-dah-suhn-dah-DUHR",
       "tags": [
         "small-talk"
+      ]
+    },
+    {
+      "id": "rt-sen-sumqayitda-dogulmusan",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Sən Sumqayıtda doğulmusan.",
+      "en": "You were born in Sumgait.",
+      "pron": "suhn sum-ga-YIT-da do-ghul-mu-SAN",
+      "note": "Say it warmly; a rising tone turns it into a gentle question.",
+      "tags": [
+        "roots"
+      ]
+    },
+    {
+      "id": "rt-usaqligin-nece-kecdi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Uşaqlığın necə keçdi?",
+      "en": "How was your childhood?",
+      "pron": "u-shag-lih-GHIN ne-JUH ke-CHDI",
+      "note": "Literally 'how did your childhood pass?'",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-mene-usaqligindan-danis",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Mənə uşaqlığından danış.",
+      "en": "Tell me about your childhood.",
+      "pron": "muh-NUH u-shag-lih-ghin-DAN da-NISH",
+      "note": "'danış' is the informal 'tell', right for your dad.",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-balaca-olanda-harada-yasayir",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Balaca olanda harada yaşayırdın?",
+      "en": "Where did you live when you were little?",
+      "pron": "ba-la-JA o-lan-DA ha-ra-DA ya-sha-YIR-dihn",
+      "note": "'yaşayırdın' = used to live (past continuous).",
+      "tags": [
+        "roots"
+      ]
+    },
+    {
+      "id": "rt-sumqayit-nece-seher-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Sumqayıt necə şəhər idi?",
+      "en": "What was Sumgait like?",
+      "pron": "sum-ga-YIT ne-JUH shuh-HUHR i-DI",
+      "tags": [
+        "roots"
+      ]
+    },
+    {
+      "id": "rt-o-vaxtlar-heyat-nece-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "O vaxtlar həyat necə idi?",
+      "en": "How was life back then?",
+      "pron": "o vakht-LAR huh-YAT ne-JUH i-DI",
+      "note": "'o vaxtlar' = those times / back then.",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-atan-ne-isle-mesgul-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Atan nə işlə məşğul idi?",
+      "en": "What did your father do for work?",
+      "pron": "a-TAN nuh ish-LUH muhsh-GHUL i-DI",
+      "note": "The natural way to ask about someone's job.",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "rt-aileniz-boyuk-idimi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Ailəniz böyük idimi?",
+      "en": "Was your family big?",
+      "pron": "a-i-luh-NIZ buh-YUK i-di-MI",
+      "note": "The '-mi' on 'idi' makes a clear yes/no question.",
+      "tags": [
+        "family"
+      ]
+    },
+    {
+      "id": "rt-senin-en-yaxsi-xatiren-nedir",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Sənin ən yaxşı xatirən nədir?",
+      "en": "What is your best memory?",
+      "pron": "suh-NIN uhn yakh-SHUH kha-ti-RUHN nuh-DIR",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-usaq-olanda-hansi-oyunlari-o",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Uşaq olanda hansı oyunları oynayırdın?",
+      "en": "What games did you play as a child?",
+      "pron": "u-SHAG o-lan-DA han-SUH o-yun-la-RIH oy-na-YIR-dihn",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-sumqayiti-xatirlayirsan",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Sumqayıtı xatırlayırsan?",
+      "en": "Do you remember Sumgait?",
+      "pron": "sum-ga-yi-TIH kha-tihr-la-YIR-san",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-dostlarin-kim-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Dostların kim idi?",
+      "en": "Who were your friends?",
+      "pron": "dost-la-RIN kim i-DI",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "id": "rt-danis-cox-maraqlidir",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Danış, çox maraqlıdır.",
+      "en": "Tell me, it's very interesting.",
+      "pron": "da-NISH, chokh ma-rag-lih-DIR",
+      "note": "'çox' (very) makes it warm and encouraging.",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-mehelleniz-nece-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Məhəlləniz necə idi?",
+      "en": "What was your neighborhood like?",
+      "pron": "muh-huhl-luh-NIZ ne-JUH i-DI",
+      "note": "'məhəllə' carries a warm, communal feeling.",
+      "tags": [
+        "roots"
+      ]
+    },
+    {
+      "id": "rt-usaqken-neden-qorxurdun",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Uşaqkən nədən qorxurdun?",
+      "en": "What were you afraid of as a kid?",
+      "pron": "u-SHAG-kuhn nuh-DUHN gor-KHUR-dun",
+      "note": "'-kən' = 'when (you were)'.",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-mektebde-hansi-fenni-sevirdi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Məktəbdə hansı fənni sevirdin?",
+      "en": "Which subject did you like in school?",
+      "pron": "muhk-tuhb-DUH han-SUH fuhn-NI se-VIR-din",
+      "tags": [
+        "school"
+      ]
+    },
+    {
+      "id": "rt-en-yaxin-dostun-kim-idi",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Ən yaxın dostun kim idi?",
+      "en": "Who was your closest friend?",
+      "pron": "uhn ya-KHIN dos-TUN kim i-DI",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "id": "rt-bayramlari-nece-qeyd-edirdin",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Bayramları necə qeyd edirdiniz?",
+      "en": "How did you celebrate the holidays?",
+      "pron": "bay-ram-la-RIH ne-JUH geyd e-dir-di-NIZ",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-yayda-ne-edirdiniz",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Yayda nə edirdiniz?",
+      "en": "What did you do in summer?",
+      "pron": "yay-DA nuh e-dir-di-NIZ",
+      "tags": [
+        "memory"
+      ]
+    },
+    {
+      "id": "rt-doguldugun-evi-xatirlayirsan",
+      "deckId": "roots",
+      "type": "phrase",
+      "az": "Doğulduğun evi xatırlayırsan?",
+      "en": "Do you remember the house you were born in?",
+      "pron": "do-ghul-du-GHUN e-VI kha-tihr-la-YIR-san",
+      "tags": [
+        "roots"
       ]
     }
   ]
