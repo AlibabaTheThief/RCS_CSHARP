@@ -62,9 +62,11 @@ async function playUrl(url: string | null): Promise<boolean> {
     current = audio
     await audio.play()
     return true
-  } catch {
-    // 404 or autoplay rejection — remember misses so we don't retry forever.
-    missing.add(url)
+  } catch (err) {
+    // Only blacklist genuine load failures (404/unsupported). Transient
+    // rejections — AbortError from an interrupting play, NotAllowedError from
+    // autoplay policy before the first tap — must NOT mute the clip forever.
+    if ((err as DOMException)?.name === 'NotSupportedError') missing.add(url)
     return false
   }
 }

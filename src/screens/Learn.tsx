@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import lessonsData from '../../data/lessons.json'
 import type { Lesson, SeedCard } from '../lib/types'
 import { getCard, getCardsByDeck, getSettings } from '../lib/db'
@@ -15,6 +16,10 @@ export default function Learn() {
   return (
     <div className="screen">
       <h1>📖 Learn</h1>
+      <div className="segment-row" role="tablist" aria-label="Learn sections">
+        <span className="segment active" role="tab" aria-selected="true">Lessons</span>
+        <Link to="/culture" className="segment" role="tab" aria-selected="false">Culture</Link>
+      </div>
       <p className="subtitle">
         Learn by whole phrases, then see the rules — how to stress words, where the quiet parts go,
         and how Azerbaijani puts sentences together.
@@ -43,9 +48,10 @@ type Step =
   | { kind: 'theory'; index: number }
 
 function LessonPlayer({ lesson, onExit }: { lesson: Lesson; onExit: () => void }) {
-  const [cards, setCards] = useState<SeedCard[]>([])
+  const [cards, setCards] = useState<SeedCard[] | null>(null) // null = loading
   const [audioEnabled, setAudioEnabled] = useState(true)
   const [i, setI] = useState(0)
+  const headingRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     void (async () => {
@@ -62,9 +68,16 @@ function LessonPlayer({ lesson, onExit }: { lesson: Lesson; onExit: () => void }
     })()
   }, [lesson])
 
+  // Move focus into the player when it opens (view swap loses focus otherwise).
+  useEffect(() => {
+    headingRef.current?.focus()
+  }, [lesson])
+
+  // Steps are only built once cards have loaded, so the list can't grow while
+  // the user is mid-lesson (which used to teleport them back into phrases).
   const steps: Step[] = useMemo(() => {
     const s: Step[] = [{ kind: 'intro' }]
-    cards.forEach((card) => s.push({ kind: 'phrase', card }))
+    ;(cards ?? []).forEach((card) => s.push({ kind: 'phrase', card }))
     lesson.theory.forEach((_, index) => s.push({ kind: 'theory', index }))
     return s
   }, [cards, lesson])
@@ -80,11 +93,22 @@ function LessonPlayer({ lesson, onExit }: { lesson: Lesson; onExit: () => void }
   const next = () => (atEnd ? onExit() : setI((n) => n + 1))
   const back = () => setI((n) => Math.max(0, n - 1))
 
+  if (cards === null) {
+    return (
+      <div className="screen">
+        <div className="center-state">
+          <div className="big-emoji">⏳</div>
+          <p className="muted">Opening lesson…</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="screen">
       <div className="row" style={{ marginBottom: 12 }}>
-        <h1 style={{ fontSize: '1.2rem' }}>{lesson.emoji} {lesson.title}</h1>
-        <button className="tag" onClick={onExit}>Close</button>
+        <h1 ref={headingRef} tabIndex={-1} style={{ fontSize: '1.2rem', outline: 'none' }}>{lesson.emoji} {lesson.title}</h1>
+        <button className="pill-btn" onClick={onExit}>Close</button>
       </div>
       <div className="progress" style={{ marginBottom: 18 }}>
         <span style={{ width: `${Math.round(((i + 1) / steps.length) * 100)}%` }} />

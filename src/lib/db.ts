@@ -110,9 +110,12 @@ export async function ensureSeeded(seed: SeedFile): Promise<void> {
     }
   }
 
+  let ord = 0
   for (const card of seed.cards) {
     // Always refresh content; only create a fresh state for brand-new cards.
-    await tx.objectStore('cards').put(card)
+    // Seed order IS curriculum order — stamp it so the queue introduces
+    // basics before hard sentences (card ids sort lexically otherwise).
+    await tx.objectStore('cards').put({ ...card, ord: ord++ })
     if (!knownCardIds.has(card.id)) {
       const state = newCardState(card.id, card.deckId, now)
       state.introduced = false // queue introduces it gradually
@@ -229,11 +232,15 @@ export async function getDadGoals(): Promise<string[]> {
 
 export async function toggleDadGoal(cardId: string): Promise<string[]> {
   const db = await getDB()
-  const goals = await getDadGoals()
+  // Read-modify-write inside ONE transaction so two quick taps can't clobber
+  // each other's update.
+  const tx = db.transaction('meta', 'readwrite')
+  const goals = ((await tx.store.get('dadGoals')) as string[] | undefined) ?? []
   const next = goals.includes(cardId)
     ? goals.filter((g) => g !== cardId)
     : [...goals, cardId]
-  await db.put('meta', next, 'dadGoals')
+  await tx.store.put(next, 'dadGoals')
+  await tx.done
   return next
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import cultureData from '../../data/culture.json'
 import type { Article } from '../lib/types'
 import { getSettings } from '../lib/db'
@@ -27,6 +28,10 @@ export default function Culture() {
   return (
     <div className="screen">
       <h1>📜 Culture</h1>
+      <div className="segment-row" role="tablist" aria-label="Learn sections">
+        <Link to="/learn" className="segment" role="tab" aria-selected="false">Lessons</Link>
+        <span className="segment active" role="tab" aria-selected="true">Culture</span>
+      </div>
       <p className="subtitle">
         A little of the world your dad grew up in — Azerbaijan's fire and food, music and Novruz, the
         Soviet years, and why he may write in a different alphabet.
@@ -62,7 +67,7 @@ function ArticleView({
   return (
     <div className="screen">
       <div className="row" style={{ marginBottom: 8 }}>
-        <button className="tag" onClick={onExit}>‹ Back</button>
+        <button className="pill-btn" onClick={onExit}>‹ Back</button>
       </div>
       <h1 style={{ marginBottom: 2 }}>{article.emoji} {article.title}</h1>
       <p className="subtitle">{article.subtitle}</p>

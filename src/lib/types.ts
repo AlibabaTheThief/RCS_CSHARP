@@ -37,6 +37,9 @@ export interface SeedCard {
   hook?: string
   /** If false, no audio is expected for this card. Defaults to true when `az` exists. */
   hasAudio?: boolean
+  /** Curriculum position within the seed (assigned at seed time); new cards are
+   * introduced in this order so basics come before hard sentences. */
+  ord?: number
   /** Optional example sentence in Azerbaijani (reuses already-taught words). */
   ex?: string
   /** English gloss of the example sentence. */

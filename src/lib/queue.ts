@@ -4,9 +4,9 @@
 
 import { cardsForMinutes } from './srs'
 import {
+  getAllCards,
   getAllStates,
   getDecks,
-  getCard,
   getSettings,
 } from './db'
 import type { CardState, SeedCard } from './types'
@@ -38,14 +38,16 @@ function introducedToday(states: CardState[], now: number): number {
 }
 
 export async function buildQueue(now = Date.now()): Promise<DailyQueue> {
-  const [settings, decks, states] = await Promise.all([
+  const [settings, decks, states, allCards] = await Promise.all([
     getSettings(),
     getDecks(),
     getAllStates(),
+    getAllCards(),
   ])
 
   const enabled = new Set(decks.filter((d) => d.enabled).map((d) => d.id))
   const phaseOf = new Map(decks.map((d) => [d.id, d.phase]))
+  const cardById = new Map(allCards.map((c) => [c.id, c]))
 
   const budget = cardsForMinutes(settings.dailyTargetMinutes)
 
@@ -54,12 +56,16 @@ export async function buildQueue(now = Date.now()): Promise<DailyQueue> {
     .filter((s) => s.introduced && enabled.has(s.deckId) && s.due <= now)
     .sort((a, b) => a.due - b.due)
 
-  // Brand-new cards (never introduced), in phase order then deck order.
+  // Brand-new cards (never introduced): phase order, then curriculum position
+  // (seed order) — NOT lexical id order, which used to surface the hardest
+  // "Dad" sentences before salam/mən/ata.
+  const ordOf = (s: CardState) => cardById.get(s.id)?.ord ?? Number.MAX_SAFE_INTEGER
   const fresh = states
     .filter((s) => !s.introduced && enabled.has(s.deckId))
     .sort(
       (a, b) =>
         (phaseOf.get(a.deckId) ?? 99) - (phaseOf.get(b.deckId) ?? 99) ||
+        ordOf(a) - ordOf(b) ||
         a.id.localeCompare(b.id),
     )
 
@@ -76,11 +82,11 @@ export async function buildQueue(now = Date.now()): Promise<DailyQueue> {
 
   const items: QueueItem[] = []
   for (const s of dueSlice) {
-    const card = await getCard(s.id)
+    const card = cardById.get(s.id)
     if (card) items.push({ card, state: s, isNew: false })
   }
   for (const s of newSlice) {
-    const card = await getCard(s.id)
+    const card = cardById.get(s.id)
     if (card) items.push({ card, state: s, isNew: true })
   }
 

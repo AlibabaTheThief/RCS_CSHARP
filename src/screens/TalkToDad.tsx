@@ -78,7 +78,7 @@ export default function TalkToDad() {
       <div className="screen">
         <div className="row" style={{ marginBottom: 12 }}>
           <h1 style={{ fontSize: '1.2rem' }}>Talk to Dad — drill</h1>
-          <button className="tag" onClick={() => setMode('list')}>
+          <button className="pill-btn" onClick={() => setMode('list')}>
             Done
           </button>
         </div>
@@ -130,7 +130,7 @@ export default function TalkToDad() {
       <div className="screen">
         <div className="row" style={{ marginBottom: 12 }}>
           <h1 style={{ fontSize: '1.2rem' }}>📞 {scene}</h1>
-          <button className="tag" onClick={() => setMode('list')}>
+          <button className="pill-btn" onClick={() => setMode('list')}>
             Done
           </button>
         </div>

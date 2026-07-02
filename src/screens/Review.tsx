@@ -66,33 +66,44 @@ export default function Review() {
     }
   }, [current, audioEnabled])
 
+  // Re-entrancy guard: grade() awaits two IndexedDB writes before the queue
+  // advances, so key auto-repeat / double-taps / the auto-advance timer racing
+  // an Adjust tap could grade the same card several times and silently consume
+  // queue items. One grade per card, period.
+  const grading = useRef(false)
+
   const grade = useCallback(
     async (g: Grade) => {
-      if (!current) return
+      if (!current || grading.current) return
+      grading.current = true
       if (autoAdvance.current) clearTimeout(autoAdvance.current)
-      const now = Date.now()
-      const nextState = applyReview(current.state, g, now)
-      await putState(nextState)
-      await logReview({ cardId: current.card.id, grade: g, at: now, intervalAfter: nextState.interval })
+      try {
+        const now = Date.now()
+        const nextState = applyReview(current.state, g, now)
+        await putState(nextState)
+        await logReview({ cardId: current.card.id, grade: g, at: now, intervalAfter: nextState.interval })
 
-      const id = current.card.id
-      const seen = reinserts.current.get(id) ?? 0
-      const reinsert =
-        nextState.learning && nextState.due <= now + REINSERT_WINDOW && seen < MAX_REINSERTS
+        const id = current.card.id
+        const seen = reinserts.current.get(id) ?? 0
+        const reinsert =
+          nextState.learning && nextState.due <= now + REINSERT_WINDOW && seen < MAX_REINSERTS
 
-      setQueue((prev) => {
-        const next = prev.slice(1) // drop the current card from the front
-        if (reinsert) {
-          reinserts.current.set(id, seen + 1)
-          const at = Math.min(REINSERT_GAP, next.length)
-          next.splice(at, 0, { ...current, state: nextState, isNew: false })
-        }
-        return next
-      })
+        setQueue((prev) => {
+          const next = prev.slice(1) // drop the current card from the front
+          if (reinsert) {
+            reinserts.current.set(id, seen + 1)
+            const at = Math.min(REINSERT_GAP, next.length)
+            next.splice(at, 0, { ...current, state: nextState, isNew: false })
+          }
+          return next
+        })
 
-      if (!reinsert) setCompleted((c) => c + 1)
-      setRevealed(false)
-      setPicked(null)
+        if (!reinsert) setCompleted((c) => c + 1)
+        setRevealed(false)
+        setPicked(null)
+      } finally {
+        grading.current = false
+      }
     },
     [current],
   )
@@ -104,10 +115,14 @@ export default function Review() {
       if (!current) return
       setPicked(option)
       setRevealed(true)
-      void playCard(current.card, audioEnabled)
+      // Listening cards replay via Flashcard's reveal effect — don't double-play
+      // (the second play() interrupts the first and can mute the clip).
+      if (current.card.type !== 'listening') {
+        void playCard(current.card, audioEnabled)
+      }
       const correct = option === answerText(current.card)
       if (autoAdvance.current) clearTimeout(autoAdvance.current)
-      autoAdvance.current = setTimeout(() => void grade(correct ? 'good' : 'again'), correct ? 1000 : 2200)
+      autoAdvance.current = setTimeout(() => void grade(correct ? 'good' : 'again'), correct ? 1200 : 2400)
     },
     [current, audioEnabled, grade],
   )
@@ -126,6 +141,7 @@ export default function Review() {
   // Keyboard: Space/Enter reveals, 1-4 grade (again/hard/good/easy).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (e.repeat) return // holding a key must not machine-gun grades
       const tag = (e.target as HTMLElement | null)?.tagName
       if (tag === 'INPUT' || tag === 'TEXTAREA') return
       if (!current) return
@@ -219,18 +235,18 @@ export default function Review() {
             <Choices card={current.card} pool={pool} picked={picked} onPick={pick} />
             {revealed && picked !== null && (
               <div style={{ marginTop: 14 }}>
-                <div className={`feedback ${isCorrect ? 'ok' : 'no'}`}>
+                <div className={`feedback ${isCorrect ? 'ok' : 'no'}`} role="status" aria-live="polite">
                   {isCorrect ? '✓ Correct!' : `✗ Answer: ${answerText(current.card)}`}
                 </div>
                 <div className="adjust-row">
                   <span className="muted small">Adjust:</span>
                   {isCorrect ? (
                     <>
-                      <button className="tag" onClick={() => adjustGrade('hard')}>Hard</button>
-                      <button className="tag" onClick={() => adjustGrade('easy')}>Easy</button>
+                      <button className="pill-btn" onClick={() => adjustGrade('hard')}>Hard</button>
+                      <button className="pill-btn" onClick={() => adjustGrade('easy')}>Easy</button>
                     </>
                   ) : (
-                    <button className="tag" onClick={() => adjustGrade('good')}>I knew it</button>
+                    <button className="pill-btn" onClick={() => adjustGrade('good')}>I knew it</button>
                   )}
                 </div>
               </div>

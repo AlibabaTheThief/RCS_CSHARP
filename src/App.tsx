@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
+import { useRegisterSW } from 'virtual:pwa-register/react'
 import seed from '../data/cards.seed.json'
 import type { SeedFile } from './lib/types'
 import { ensureSeeded, requestPersistentStorage } from './lib/db'
+import Home from './screens/Home'
 import Review from './screens/Review'
 import Learn from './screens/Learn'
 import Culture from './screens/Culture'
 import Decks from './screens/Decks'
 import AddPhrase from './screens/AddPhrase'
-import Stats from './screens/Stats'
 import SettingsScreen from './screens/Settings'
 import TalkToDad from './screens/TalkToDad'
 
 export default function App() {
   const [ready, setReady] = useState(false)
+  const {
+    needRefresh: [needRefresh],
+    updateServiceWorker,
+  } = useRegisterSW()
 
   useEffect(() => {
     // Ask for durable storage early so progress survives storage pressure.
@@ -36,14 +41,24 @@ export default function App() {
 
   return (
     <div className="app">
+      {needRefresh && (
+        <div className="update-banner" role="status">
+          <span>✨ Update ready</span>
+          <button className="pill-btn" onClick={() => void updateServiceWorker(true)}>
+            Reload
+          </button>
+        </div>
+      )}
       <Routes>
-        <Route path="/" element={<Review />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/review" element={<Review />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/culture" element={<Culture />} />
         <Route path="/decks" element={<Decks />} />
         <Route path="/add" element={<AddPhrase />} />
         <Route path="/dad" element={<TalkToDad />} />
-        <Route path="/stats" element={<Stats />} />
+        {/* Old bookmarks: Stats now lives on Home. */}
+        <Route path="/stats" element={<Navigate to="/" replace />} />
         <Route path="/settings" element={<SettingsScreen />} />
       </Routes>
       <BottomNav />
@@ -53,12 +68,10 @@ export default function App() {
 
 function BottomNav() {
   const items = [
-    { to: '/', icon: '🔁', label: 'Review', end: true },
+    { to: '/', icon: '🏠', label: 'Home', end: true },
+    { to: '/review', icon: '🔁', label: 'Review' },
     { to: '/learn', icon: '📖', label: 'Learn' },
-    { to: '/culture', icon: '📜', label: 'Culture' },
-    { to: '/decks', icon: '📚', label: 'Decks' },
     { to: '/dad', icon: '❤️', label: 'Dad' },
-    { to: '/stats', icon: '📈', label: 'Stats' },
     { to: '/settings', icon: '⚙️', label: 'Settings' },
   ]
   return (

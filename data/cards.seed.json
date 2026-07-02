@@ -54,14 +54,14 @@
       "name": "Everyday Phrases",
       "phase": 1,
       "description": "High-frequency phrases for real conversations — learn by whole phrases.",
-      "enabledByDefault": true
+      "enabledByDefault": false
     },
     {
       "id": "roots",
       "name": "Dad's Roots",
       "phase": 1,
       "description": "Ask Dad about his childhood in Sumgait and the world he grew up in.",
-      "enabledByDefault": true
+      "enabledByDefault": false
     }
   ],
   "cards": [

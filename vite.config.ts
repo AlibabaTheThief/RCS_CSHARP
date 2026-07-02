@@ -10,8 +10,13 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['icons/*.png', 'audio/*.mp3'],
+      // 'prompt': never reload the app mid-session — show an "Update ready"
+      // banner and let the user apply it. (autoUpdate made every open feel
+      // like a brand-new app after frequent deploys.)
+      registerType: 'prompt',
+      // audio/*.mp3 is already covered by globPatterns — listing it here too
+      // used to double-count entries in the precache manifest.
+      includeAssets: ['icons/*.png'],
       workbox: {
         // Audio files can be large in aggregate; allow generous precache size.
         maximumFileSizeToCacheInBytes: 25 * 1024 * 1024,

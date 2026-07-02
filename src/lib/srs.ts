@@ -143,7 +143,7 @@ function graduate(card: CardState, now: number, days: number): CardState {
  * Estimated seconds a single card review takes, used to size the daily queue
  * so it fits the user's time budget.
  */
-export const SECONDS_PER_CARD = 8
+export const SECONDS_PER_CARD = 10
 
 /** How many cards roughly fit into a daily target of `minutes`. */
 export function cardsForMinutes(minutes: number): number {
